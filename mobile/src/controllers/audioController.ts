@@ -9,10 +9,10 @@ type Selector = 'next' | 'previous';
 export const play = async (playbackObj: Audio.Sound, uri: string, lastPosition?: number) => {
   try {
     if (!lastPosition)
-      return await playbackObj.loadAsync({ uri }, { shouldPlay: true, progressUpdateIntervalMillis: 1000 });
+      return await playbackObj.loadAsync({ uri }, { shouldPlay: true });
 
     // but if there is lastPosition then we will play audio from the lastPosition
-    await playbackObj.loadAsync({ uri }, { progressUpdateIntervalMillis: 1000 });
+    await playbackObj.loadAsync({ uri });
 
     return await playbackObj.playFromPositionAsync(lastPosition);
   } catch (error) {
@@ -72,7 +72,7 @@ export const selectAudio = async (audio: any, context: AudioContext, playListInf
     }
 
     // pause audio
-    if (soundObj.isLoaded && soundObj.isPlaying && currentAudio.id === audio.id) {
+    if (soundObj.isLoaded && soundObj.isPlaying && currentAudio!.id === audio.id) {
       const status = await pause(playbackObj);
       return updateState({
         soundObj: status === undefined ? null : status,
@@ -82,13 +82,13 @@ export const selectAudio = async (audio: any, context: AudioContext, playListInf
     }
 
     // resume audio
-    if (soundObj.isLoaded && !soundObj.isPlaying && currentAudio.id === audio.id) {
+    if (soundObj.isLoaded && !soundObj.isPlaying && currentAudio!.id === audio.id) {
       const status = await resume(playbackObj);
       return updateState({ soundObj: status, isPlaying: true });
     }
 
     // select another audio
-    if (soundObj.isLoaded && currentAudio.id !== audio.id) {
+    if (soundObj.isLoaded && currentAudio!.id !== audio.id) {
       const status = await playNext(playbackObj, audio.uri);
       const index = audioFiles.findIndex(({ id }) => id === audio.id);
       updateState({
@@ -116,7 +116,7 @@ const selectAudioFromPlayList = async (context: AudioContext, select: Selector) 
   let defaultIndex;
   let nextIndex;
 
-  const indexOnPlayList = activePlayList.audios.findIndex(({ id }) => id === currentAudio.id);
+  const indexOnPlayList = activePlayList.audios.findIndex(({ id }) => id === currentAudio!.id);
 
   switch (select) {
     case 'next':

@@ -16,7 +16,7 @@ export interface AudioState {
   dataProvider: DataProvider;
   playbackObj: Audio.Sound;
   soundObj: AVPlaybackStatus | null;
-  currentAudio: any;
+  currentAudio: MediaLibrary.Asset | null;
   isPlaying: boolean;
   isPlayListRunning: boolean;
   activePlayList: {
@@ -25,7 +25,7 @@ export interface AudioState {
     title: string;
   } | null;
   currentAudioIndex: number;
-  playbackPosition: null;
+  playbackPosition: number | null;
   playbackDuration: null;
 }
 
@@ -54,7 +54,7 @@ export const initialState: AudioState = {
   dataProvider: new DataProvider((r1, r2) => r1 !== r2),
   playbackObj: new Audio.Sound(),
   soundObj: null,
-  currentAudio: {},
+  currentAudio: null,
   isPlaying: false,
   isPlayListRunning: false,
   activePlayList: null,
@@ -112,13 +112,13 @@ export function AudioProvider(props: PropsWithChildren<AudioProviderProps>): Rea
     }
 
     if (playbackStatus.isLoaded && !playbackStatus.isPlaying) {
-      storeAudioForNextOpening(state.currentAudio, state.currentAudioIndex, playbackStatus.positionMillis);
+      storeAudioForNextOpening(state.currentAudio!, state.currentAudioIndex, playbackStatus.positionMillis);
     }
 
     if (playbackStatus.didJustFinish) {
       if (state.isPlayListRunning && !!state.activePlayList) {
         let audio: MediaLibrary.Asset;
-        const indexOnPlayList = state.activePlayList.audios.findIndex(({ id }) => id === state.currentAudio.id);
+        const indexOnPlayList = state.activePlayList.audios.findIndex(({ id }) => id === state.currentAudio!.id);
         const nextIndex = indexOnPlayList + 1;
         audio = state.activePlayList.audios[nextIndex];
 
