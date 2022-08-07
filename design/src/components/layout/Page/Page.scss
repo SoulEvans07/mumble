@@ -1,0 +1,30 @@
+.page {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-dark-600);
+  color: var(--color-light-300);
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 1440px) {
+  .page {
+    background-position: center 0;
+    background-size: auto 300px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .page {
+    background-position: center -100px;
+    background-size: auto 400px;
+    background-image: var(--bg-mobile);
+  }
+}
+
+@media screen and (max-width: 563px) {
+  .page {
+    background-position: center 0;
+    background-size: auto 300px;
+  }
+}

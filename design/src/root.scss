@@ -1,0 +1,56 @@
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+:root {
+  --color-primary-600: hsl(220, 78%, 40%);
+  --color-primary-500: hsl(220, 78%, 50%);
+  --color-primary-400: hsl(220, 98%, 60%);
+  --color-primary-300: hsl(220, 98%, 70%);
+  --color-primary-200: hsl(220, 98%, 80%);
+  --color-primary-100: hsl(220, 98%, 95%);
+
+  --color-red-600: hsl(350, 60%, 40%);
+  --color-red-500: hsl(350, 60%, 50%);
+  --color-red-400: hsl(350, 60%, 60%);
+  --color-red-300: hsl(350, 60%, 70%);
+  --color-red-200: hsl(350, 60%, 80%);
+  --color-red-100: hsl(350, 60%, 95%);
+
+  --font-size: 18px;
+  --border-radius: 0.25rem;
+
+  color-scheme: dark;
+}
+
+body {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: var(--font-size);
+
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color);
+}
+
+body.theme-dark {
+  --color-dark-600: hsl(235, 21%, 11%);
+  --color-dark-500: hsl(235, 24%, 19%);
+  --color-dark-400: hsl(237, 14%, 26%);
+  --color-dark-300: hsl(233, 14%, 35%);
+  --color-dark-200: hsl(234, 11%, 52%);
+  --color-light-300: hsl(234, 39%, 85%);
+  --color-light-200: hsl(236, 33%, 92%);
+
+  --color-tl-green-light: hsl(165, 31%, 60%);
+  --color-tl-green-dark: hsl(165, 71%, 95%);
+  --color-tl-red-light: hsl(350, 60%, 60%);
+  --color-tl-red-dark: hsl(350, 100%, 95%);
+  --color-tl-purple-light: hsl(249, 44%, 60%);
+  --color-tl-purple-dark: hsl(249, 84%, 95%);
+
+  --drop-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.3);
+  --drop-shadow-small: 0px 3px 5px 0px rgba(0, 0, 0, 0.3);
+
+  color-scheme: dark;
+}
