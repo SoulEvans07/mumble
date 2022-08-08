@@ -1,3 +1,4 @@
+import { millisToMin } from '../../utils/timeUtils';
 import { StoreData } from './types';
 
 export const getLibrarySlice = (store: StoreData) => store.library;
@@ -34,7 +35,7 @@ export const getPlayerState = (store: StoreData) => {
     track,
     artist,
     percent: (current.playbackPosition / track.duration) * 100,
-    duration: track.duration,
-    position: current.playbackPosition,
+    duration: millisToMin(track.duration),
+    position: millisToMin(current.playbackPosition),
   };
 };

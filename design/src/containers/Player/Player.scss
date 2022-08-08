@@ -11,6 +11,10 @@
   background-color: var(--color-dark-600);
   color: var(--color-light-200);
 
+  & > * {
+    z-index: 110;
+  }
+
   header {
     position: fixed;
     top: 0;
@@ -74,6 +78,78 @@
       width: 1.5rem;
       height: 1.5rem;
       padding: 1rem;
+    }
+  }
+
+  .background {
+    position: absolute;
+    inset: 0;
+    z-index: 101;
+    background: linear-gradient(to bottom, #141c2f, #213b54);
+  }
+
+  .lyrics {
+    margin-top: 5rem;
+    font-size: 1.9rem;
+    color: white;
+    font-weight: bold;
+    padding: 0 1rem;
+
+    .line {
+      opacity: 0.5;
+      margin-bottom: 1rem;
+
+      &.current {
+        opacity: 1;
+      }
+    }
+  }
+
+  .controls {
+    position: fixed;
+    bottom: 5rem;
+    left: 0;
+    right: 0;
+
+    .timeline {
+      padding: 0 1rem;
+
+      .slider {
+        --height: 4px;
+        position: relative;
+        width: 100%;
+        border-radius: 2px;
+        height: var(--height);
+        background-color: hsla(0, 0%, 100%, 0.5);
+        margin-bottom: 0.8rem;
+
+        .knob {
+          --size: 1rem;
+          position: absolute;
+          top: calc((var(--height) - var(--size)) * 0.5);
+          left: calc(var(--progress, 0%) - var(--size) * 0.5);
+          height: var(--size);
+          width: var(--size);
+          border-radius: 100%;
+          background-color: hsla(0, 0%, 100%, 1);
+        }
+
+        .progress {
+          border-radius: 2px;
+          height: 100%;
+          width: var(--progress, 0%);
+          background-color: hsla(0, 0%, 100%, 1);
+        }
+      }
+
+      .times {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        font-size: 0.8rem;
+        opacity: 0.5;
+      }
     }
   }
 }
