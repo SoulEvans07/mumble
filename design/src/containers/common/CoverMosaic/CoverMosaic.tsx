@@ -1,10 +1,11 @@
 import { ReactElement, useMemo } from 'react';
 import './CoverMosaic.scss';
 
-import { albums } from '../../../types/mockData';
 import { Track } from '../../../types/model';
 import { CoverImage } from '../CoverImage/CoverImage';
 import { stringToHash } from '../../../utils/stringToHash';
+import { getAlbums } from '../../../contexts/store/selectors';
+import { useSelector } from '../../../contexts/store/StoreContext';
 
 interface CoverMosaicProps {
   tracks: Track[];
@@ -12,13 +13,17 @@ interface CoverMosaicProps {
 
 export function CoverMosaic(props: CoverMosaicProps): ReactElement {
   const { tracks } = props;
+  const albums = useSelector(getAlbums);
 
   const [topLeft, topRight, bottomLeft, bottomRight] = useMemo(() => {
     const covers: string[] = [];
 
     for (const track of tracks) {
-      const album = albums.find(a => a.id === track.albumId);
+      if (!track.albumId) continue;
+
+      const album = albums[track.albumId];
       if (album && album.coverImage && !covers.includes(album.coverImage)) covers.push(album.coverImage);
+
       if (covers.length === 4) break;
     }
 

@@ -10,7 +10,7 @@ import { Player } from '../Player/Player';
 
 const bottomMenu: NavTab[] = [
   { path: ROUTES.HOME, title: 'Home', icon: 'house' },
-  { path: ROUTES.MUSIC, title: 'Music', icon: 'album-collection' },
+  { path: ROUTES.LIBRARY, title: 'Library', icon: 'album-collection' },
   { path: ROUTES.SEARCH, title: 'Search', icon: 'magnifying-glass' },
 ];
 

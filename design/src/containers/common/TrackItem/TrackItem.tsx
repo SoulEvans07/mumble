@@ -2,8 +2,9 @@ import { ReactElement, useMemo } from 'react';
 import './TrackItem.scss';
 
 import { Track } from '../../../types/model';
-import { artists } from '../../../types/mockData';
 import { CoverImage } from '../CoverImage/CoverImage';
+import { useSelector } from '../../../contexts/store/StoreContext';
+import { getArtists } from '../../../contexts/store/selectors';
 
 interface TrackItemProps {
   item: Track;
@@ -11,8 +12,9 @@ interface TrackItemProps {
 
 export function TrackItem(props: TrackItemProps): ReactElement {
   const { item } = props;
+  const artists = useSelector(getArtists);
 
-  const artist = useMemo(() => artists.find(a => a.id === item.artistId), [artists]);
+  const artist = useMemo(() => (!!item.artistId ? artists[item.artistId] : undefined), [artists, item]);
 
   return (
     <li className="track-item">

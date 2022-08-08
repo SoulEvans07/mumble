@@ -3,7 +3,8 @@ import './AlbumItem.scss';
 
 import { Album } from '../../../types/model';
 import { CoverImage } from '../CoverImage/CoverImage';
-import { artists } from '../../../types/mockData';
+import { getArtists } from '../../../contexts/store/selectors';
+import { useSelector } from '../../../contexts/store/StoreContext';
 
 interface AlbumItemProps {
   item: Album;
@@ -11,8 +12,9 @@ interface AlbumItemProps {
 
 export function AlbumItem(props: AlbumItemProps): ReactElement {
   const { item } = props;
+  const artists = useSelector(getArtists);
 
-  const artist = useMemo(() => artists.find(a => a.id === item.artistId), [artists]);
+  const artist = useMemo(() => (!!item.artistId ? artists[item.artistId] : undefined), [artists, item]);
 
   return (
     <li className="album-item">

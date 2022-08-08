@@ -4,7 +4,7 @@ import './PlayerBar.scss';
 import { useDispatch } from '../../contexts/store/StoreContext';
 import { artists, tracks } from '../../types/mockData';
 import { Icon } from '../../components/ui/Icon/Icon';
-import { CoverImage } from '../../components/common/CoverImage/CoverImage';
+import { CoverImage } from '../common/CoverImage/CoverImage';
 import { changePlayerVisibility } from '../../contexts/store/actions';
 
 export function PlayerBar(): ReactElement {

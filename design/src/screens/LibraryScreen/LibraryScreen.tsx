@@ -1,25 +1,31 @@
-import { ReactElement, useMemo, useState } from 'react';
+import { ReactElement, useMemo } from 'react';
 import classNames from 'classnames';
-import './MusicScreen.scss';
+import './LibraryScreen.scss';
 
 import { Page } from '../../components/layout/Page/Page';
 import { albums, artists, playlists, tracks } from '../../types/mockData';
 import { isAlbum, isArtist, isPlaylist, isTrack } from '../../types/model';
-import { TrackItem } from '../../components/common/TrackItem/TrackItem';
-import { AlbumItem } from '../../components/common/AlbumItem/AlbumItem';
-import { ArtistItem } from '../../components/common/ArtistItem/ArtistItem';
-import { PlaylistItem } from '../../components/common/PlaylistItem/PlaylistItem';
+import { TrackItem } from '../../containers/common/TrackItem/TrackItem';
+import { AlbumItem } from '../../containers/common/AlbumItem/AlbumItem';
+import { ArtistItem } from '../../containers/common/ArtistItem/ArtistItem';
+import { PlaylistItem } from '../../containers/common/PlaylistItem/PlaylistItem';
+import { useDispatch, useSelector } from '../../contexts/store/StoreContext';
+import { getActiveLibraryTab, getLibraryTabs } from '../../contexts/store/selectors';
+import { setActiveLibraryTab } from '../../contexts/store/actions';
 
-export function MusicScreen(): ReactElement {
-  const [activeTab, setActiveTab] = useState<TopTabTitle>(tabs[0].title);
-  const onSelectTab = (tab: TopTabTitle) => () => setActiveTab(tab);
+export function LibraryScreen(): ReactElement {
+  const dispatch = useDispatch();
+  const tabs = useSelector(getLibraryTabs);
+  const activeTab = useSelector(getActiveLibraryTab);
+
+  const onSelectTab = (tab: TopTabTitle) => () => dispatch(setActiveLibraryTab(tab));
 
   const activeList = useMemo(() => {
     return tabs.find(tab => tab.title === activeTab);
   }, [activeTab]);
 
   return (
-    <Page className="music-screen">
+    <Page className="library-screen">
       <header>
         <h1>Music</h1>
       </header>

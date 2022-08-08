@@ -1,8 +1,9 @@
 import { CSSProperties, ReactElement, useMemo } from 'react';
 import './CoverImage.scss';
 
-import { albums } from '../../../types/mockData';
-import { Icon } from '../../ui/Icon/Icon';
+import { Icon } from '../../../components/ui/Icon/Icon';
+import { useSelector } from '../../../contexts/store/StoreContext';
+import { getAlbums } from '../../../contexts/store/selectors';
 
 interface CoverImageProps {
   src?: string;
@@ -12,12 +13,13 @@ interface CoverImageProps {
 
 export function CoverImage(props: CoverImageProps): ReactElement {
   const { src, albumId, hue } = props;
+  const albums = useSelector(getAlbums);
 
   const coverImage = useMemo(() => {
     if (src) return src;
 
     if (albumId) {
-      const album = albums.find(a => a.id === albumId);
+      const album = albums[albumId];
       return album?.coverImage;
     }
 
