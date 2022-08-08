@@ -9,6 +9,8 @@ import {
   pausePlay,
   toggleShuffle,
   setRepeatMode,
+  queueNext,
+  queuePrev,
 } from '../../contexts/store/actions';
 import { Icon } from '../../components/ui/Icon/Icon';
 import { CoverImage } from '../common/CoverImage/CoverImage';
@@ -30,6 +32,9 @@ export function Player(): ReactElement {
 
   const onPlay = () => dispatch(resumePlay());
   const onPause = () => dispatch(pausePlay());
+
+  const onPrev = () => dispatch(queuePrev());
+  const onNext = () => dispatch(queueNext());
 
   const onRepeat = (mode: RepeatMode) => dispatch(setRepeatMode(mode));
   const onShuffle = () => dispatch(toggleShuffle());
@@ -67,13 +72,13 @@ export function Player(): ReactElement {
         </div>
         <div className="queue-controls">
           <IconCheckbox icon="shuffle" className="shuffle-btn" checked={shuffle} onClick={onShuffle} />
-          <Icon icon="backward-step" className="prev-btn" onClick={onBack} />
+          <Icon icon="backward-step" className="prev-btn" onClick={onPrev} />
           {isPlaying ? (
             <Icon icon="pause" className="play-btn" onClick={onPause} />
           ) : (
             <Icon icon="play" className="play-btn" onClick={onPlay} />
           )}
-          <Icon icon="forward-step" className="next-btn" onClick={onBack} />
+          <Icon icon="forward-step" className="next-btn" onClick={onNext} />
           <IconMultiCheckbox
             icon="repeat"
             className="repeat-btn"

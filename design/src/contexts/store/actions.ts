@@ -13,8 +13,11 @@ export const queueAlbum = (album: Album) => action('mumble.io/player/queue/album
 export const queueArtist = (artist: Artist) => action('mumble.io/player/queue/artist', { artist });
 export const queuePlaylist = (playlist: Playlist) => action('mumble.io/player/queue/playlist', { playlist });
 
-export const resumePlay = () => action('mumle.io/player/resume');
-export const pausePlay = () => action('mumle.io/player/pause');
+export const queuePrev = () => action('mumble.io/player/queue/prev');
+export const queueNext = () => action('mumble.io/player/queue/next');
 
-export const toggleShuffle = () => action('mumle.io/player/shuffle/toggle');
-export const setRepeatMode = (mode: RepeatMode) => action('mumle.io/player/setRepeatMode', { mode });
+export const resumePlay = () => action('mumble.io/player/resume');
+export const pausePlay = () => action('mumble.io/player/pause');
+
+export const toggleShuffle = () => action('mumble.io/player/shuffle/toggle');
+export const setRepeatMode = (mode: RepeatMode) => action('mumble.io/player/setRepeatMode', { mode });

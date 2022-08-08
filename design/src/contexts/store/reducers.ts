@@ -10,12 +10,12 @@ export function rootReducer(state: StoreData, action: ActionType<typeof actions>
       return produce(state, draft => {
         draft.library.activeTab = action.payload.tab;
       });
-    case 'mumle.io/player/resume':
+    case 'mumble.io/player/resume':
       return produce(state, draft => {
         if (!draft.player.current) throw new Error('Tried to resume without song selected!');
         draft.player.current.isPlaying = true;
       });
-    case 'mumle.io/player/pause':
+    case 'mumble.io/player/pause':
       return produce(state, draft => {
         if (!draft.player.current) throw new Error('Tried to pause without song selected!');
         draft.player.current.isPlaying = false;
@@ -33,11 +33,29 @@ export function rootReducer(state: StoreData, action: ActionType<typeof actions>
           playbackPosition: 55000,
         };
       });
-    case 'mumle.io/player/shuffle/toggle':
+    case 'mumble.io/player/queue/prev':
+      return produce(state, draft => {
+        if (!draft.player.current) throw new Error('Tried to prev without song selected!');
+        if (
+          draft.player.current.playbackPosition / draft.player.queue[draft.player.current.trackIndex].duration <=
+          0.1
+        ) {
+          draft.player.current.trackIndex =
+            (draft.player.queue.length + draft.player.current.trackIndex - 1) % draft.player.queue.length;
+        } else {
+          draft.player.current.playbackPosition = 0;
+        }
+      });
+    case 'mumble.io/player/queue/next':
+      return produce(state, draft => {
+        if (!draft.player.current) throw new Error('Tried to next without song selected!');
+        draft.player.current.trackIndex = (draft.player.current.trackIndex + 1) % draft.player.queue.length;
+      });
+    case 'mumble.io/player/shuffle/toggle':
       return produce(state, draft => {
         draft.player.shuffle = !draft.player.shuffle;
       });
-    case 'mumle.io/player/setRepeatMode':
+    case 'mumble.io/player/setRepeatMode':
       return produce(state, draft => {
         draft.player.repeat = action.payload.mode;
       });
