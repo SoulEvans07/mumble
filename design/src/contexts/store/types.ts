@@ -11,6 +11,7 @@ export interface LibrarySlice {
   playlists: Record<string, Playlist>;
 }
 
+export type RepeatMode = 'repeat' | 'single' | 'no-repeat';
 export interface PlayerSlice {
   isVisible: boolean;
   current: {
@@ -18,6 +19,8 @@ export interface PlayerSlice {
     isPlaying: boolean;
     playbackPosition: number; // millisec
   } | null;
+  repeat: RepeatMode;
+  shuffle: boolean;
   queue: Track[];
 }
 
@@ -33,6 +36,8 @@ export const initialStoreData: StoreData = {
     isVisible: false,
     current: null,
     queue: [],
+    repeat: 'repeat',
+    shuffle: false,
   },
   library: {
     activeTab: 'Tracks',

@@ -21,7 +21,7 @@ export const getLibraryTabs = (store: StoreData) => {
 export const getPlayerSlice = (store: StoreData) => store.player;
 export const getPlayerVisibility = (store: StoreData) => getPlayerSlice(store).isVisible;
 export const getPlayerState = (store: StoreData) => {
-  const { current, queue } = getPlayerSlice(store);
+  const { current, queue, shuffle, repeat } = getPlayerSlice(store);
   if (!queue.length) return { hasPlaylist: false as const, isPlaying: false as const };
   if (!current) throw new Error('No track selected but has queue');
 
@@ -37,5 +37,7 @@ export const getPlayerState = (store: StoreData) => {
     percent: (current.playbackPosition / track.duration) * 100,
     duration: millisToMin(track.duration),
     position: millisToMin(current.playbackPosition),
+    shuffle,
+    repeat,
   };
 };

@@ -33,6 +33,14 @@ export function rootReducer(state: StoreData, action: ActionType<typeof actions>
           playbackPosition: 55000,
         };
       });
+    case 'mumle.io/player/shuffle/toggle':
+      return produce(state, draft => {
+        draft.player.shuffle = !draft.player.shuffle;
+      });
+    case 'mumle.io/player/setRepeatMode':
+      return produce(state, draft => {
+        draft.player.repeat = action.payload.mode;
+      });
     case 'mumble.io/clear-data':
       return initialStoreData;
     default:

@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 type ReactSVG = React.FC<SVGProps<SVGSVGElement>>;
 
-interface IconProps extends SVGProps<SVGSVGElement> {
+export interface IconProps extends SVGProps<SVGSVGElement> {
   icon: string;
 }
 

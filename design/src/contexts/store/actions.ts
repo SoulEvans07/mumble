@@ -1,6 +1,6 @@
 import { action } from 'typesafe-actions';
 import { Album, Artist, Playlist, Track } from '../../types/model';
-import { LibraryTab } from './types';
+import { LibraryTab, RepeatMode } from './types';
 
 export const clearData = () => action('mumble.io/clear-data');
 
@@ -15,3 +15,6 @@ export const queuePlaylist = (playlist: Playlist) => action('mumble.io/player/qu
 
 export const resumePlay = () => action('mumle.io/player/resume');
 export const pausePlay = () => action('mumle.io/player/pause');
+
+export const toggleShuffle = () => action('mumle.io/player/shuffle/toggle');
+export const setRepeatMode = (mode: RepeatMode) => action('mumle.io/player/setRepeatMode', { mode });

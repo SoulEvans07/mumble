@@ -107,7 +107,7 @@
 
   .controls {
     position: fixed;
-    bottom: 5rem;
+    bottom: 0;
     left: 0;
     right: 0;
 
@@ -149,6 +149,43 @@
 
         font-size: 0.8rem;
         opacity: 0.5;
+      }
+    }
+
+    .queue-controls {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0.5rem 2rem;
+
+      .icon {
+        fill: white;
+        flex-shrink: 0;
+      }
+
+      .shuffle-btn,
+      .repeat-btn {
+        --size: 1.25rem;
+      }
+
+      .prev-btn,
+      .next-btn {
+        width: 2rem;
+        height: 2rem;
+      }
+
+      .prev-btn {
+        margin-left: auto;
+      }
+
+      .next-btn {
+        margin-right: auto;
+      }
+
+      .play-btn {
+        width: 3rem;
+        height: 3rem;
+        margin: 0 1rem;
       }
     }
   }

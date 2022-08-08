@@ -1,0 +1,29 @@
+.icon-checkbox {
+  --size: 2rem;
+  flex-shrink: 0;
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+
+  opacity: 0.6;
+
+  &.checked {
+    opacity: 1;
+  }
+
+  .main-icon {
+    fill: white;
+
+    width: var(--size);
+    height: var(--size);
+  }
+
+  .dot {
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(var(--size) * 0.8);
+    height: calc(var(--size) * 0.8);
+  }
+}
