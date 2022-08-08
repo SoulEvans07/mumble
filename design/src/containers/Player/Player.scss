@@ -10,4 +10,70 @@
 
   background-color: var(--color-dark-600);
   color: var(--color-light-200);
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3.5rem;
+
+    display: flex;
+    flex-direction: row;
+
+    .close-btn {
+      fill: white;
+      opacity: 0.8;
+      width: 1.5rem;
+      height: 1.5rem;
+      padding: 1rem;
+    }
+
+    .track-block {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      align-items: center;
+
+      height: 2.5rem;
+      padding: 0.5rem 0;
+
+      .cover-image {
+        flex-shrink: 0;
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+
+      .text-block {
+        flex: 1;
+        padding: 0.25rem 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .title,
+        .artist {
+          overflow: hidden;
+        }
+
+        .title {
+          font-weight: bold;
+          font-size: 1rem;
+        }
+
+        .artist {
+          font-size: 0.9rem;
+          opacity: 0.5;
+        }
+      }
+    }
+
+    .fav-btn {
+      fill: white;
+      opacity: 0.8;
+      width: 1.5rem;
+      height: 1.5rem;
+      padding: 1rem;
+    }
+  }
 }

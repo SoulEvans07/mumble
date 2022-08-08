@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from '../../contexts/store/StoreContext';
 import { Icon } from '../../components/ui/Icon/Icon';
 import { CoverImage } from '../common/CoverImage/CoverImage';
 import { changePlayerVisibility, pausePlay, resumePlay } from '../../contexts/store/actions';
-import { getPlayerBarState } from '../../contexts/store/selectors';
+import { getPlayerState } from '../../contexts/store/selectors';
 
 export function PlayerBar(): ReactElement {
   const dispatch = useDispatch();
-  const { hasPlaylist, isPlaying, track, artist, percent } = useSelector(getPlayerBarState);
+  const { hasPlaylist, isPlaying, track, artist, percent } = useSelector(getPlayerState);
 
   if (!hasPlaylist) return <></>;
 
@@ -29,7 +29,7 @@ export function PlayerBar(): ReactElement {
 
   return (
     <section className="player-bar" onClick={openPlayer}>
-      <div className="player-block">
+      <div className="track-block">
         <CoverImage albumId={track.albumId} />
         <div className="text-block">
           <span className="title">{track.title}</span>

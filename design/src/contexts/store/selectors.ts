@@ -19,10 +19,10 @@ export const getLibraryTabs = (store: StoreData) => {
 
 export const getPlayerSlice = (store: StoreData) => store.player;
 export const getPlayerVisibility = (store: StoreData) => getPlayerSlice(store).isVisible;
-export const getPlayerBarState = (store: StoreData) => {
+export const getPlayerState = (store: StoreData) => {
   const { current, queue } = getPlayerSlice(store);
   if (!queue.length) return { hasPlaylist: false as const, isPlaying: false as const };
-  if (!current) throw new Error("No track selected but has queue");
+  if (!current) throw new Error('No track selected but has queue');
 
   const track = queue[current.trackIndex];
   const artists = getArtists(store);
@@ -33,7 +33,7 @@ export const getPlayerBarState = (store: StoreData) => {
     isPlaying: current.isPlaying,
     track,
     artist,
-    percent: current.playbackPosition / track.duration * 100,
+    percent: (current.playbackPosition / track.duration) * 100,
     duration: track.duration,
     position: current.playbackPosition,
   };
