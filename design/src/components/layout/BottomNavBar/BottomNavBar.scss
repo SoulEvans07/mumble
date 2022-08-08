@@ -11,6 +11,9 @@
 
   height: 3.5rem;
 
+  background-color: hsl(226, 17%, 15%);
+  border-top: 1px solid hsl(226, 17%, 20%);
+
   .tab-btn {
     height: 100%;
     padding: 0 1rem;
@@ -20,12 +23,23 @@
     align-items: center;
     text-align: center;
 
-    .icon {
+    --opacity: 0.4;
 
+    &.active {
+      --opacity: 0.8;
+    }
+
+    .icon {
+      opacity: var(--opacity);
+      fill: white;
+      width: 1.5rem;
     }
 
     .title {
-      font-size: 0.8rem;
+      opacity: var(--opacity);
+      fill: white;
+      margin-top: 0.3rem;
+      font-size: 0.7rem;
     }
   }
 }
