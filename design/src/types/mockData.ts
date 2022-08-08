@@ -14,12 +14,12 @@ const clubMajesty = new Album('Club Majesty', royalRepublic, '/images/album-cove
 
 export const albums: Album[] = [body, dangerousWoman, takeMeHome, clubMajesty];
 
-const bodyTrack = new Track('body.mp3', 'Body', body);
-const dangerousWomanTrack = new Track('dangerous woman.mp3', 'Dangerous Woman', dangerousWoman);
-const takeMeHomeTrack = new Track('take me home.mp3', 'Take Me Home', takeMeHome);
-const boomerangTrack = new Track('boomerang.mp3', 'Boomerang', clubMajesty);
-const magicTrack = new Track('magic.mp3', 'Magic', clubMajesty);
-const fireManTrack = new Track('fire man.mp3', 'Fire Man', clubMajesty);
+const bodyTrack = new Track('body.mp3', 'Body', 204000, body);
+const dangerousWomanTrack = new Track('dangerous woman.mp3', 'Dangerous Woman', 222000, dangerousWoman);
+const takeMeHomeTrack = new Track('take me home.mp3', 'Take Me Home', 253000, takeMeHome);
+const boomerangTrack = new Track('boomerang.mp3', 'Boomerang', 180000, clubMajesty);
+const magicTrack = new Track('magic.mp3', 'Magic', 164000, clubMajesty);
+const fireManTrack = new Track('fire man.mp3', 'Fire Man', 155000, clubMajesty);
 
 export const tracks: Track[] = [
   bodyTrack,

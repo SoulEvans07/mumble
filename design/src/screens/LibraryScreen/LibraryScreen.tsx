@@ -12,13 +12,14 @@ import { PlaylistItem } from '../../containers/common/PlaylistItem/PlaylistItem'
 import { useDispatch, useSelector } from '../../contexts/store/StoreContext';
 import { getActiveLibraryTab, getLibraryTabs } from '../../contexts/store/selectors';
 import { setActiveLibraryTab } from '../../contexts/store/actions';
+import { LibraryTab } from '../../contexts/store/types';
 
 export function LibraryScreen(): ReactElement {
   const dispatch = useDispatch();
   const tabs = useSelector(getLibraryTabs);
   const activeTab = useSelector(getActiveLibraryTab);
 
-  const onSelectTab = (tab: TopTabTitle) => () => dispatch(setActiveLibraryTab(tab));
+  const onSelectTab = (tab: LibraryTab) => () => dispatch(setActiveLibraryTab(tab));
 
   const activeList = useMemo(() => {
     return tabs.find(tab => tab.title === activeTab);
@@ -53,8 +54,6 @@ const tabs = [
   { title: 'Albums', items: albums },
   { title: 'Playlists', items: playlists },
 ] as const;
-
-type TopTabTitle = typeof tabs[number]['title'];
 
 function renderItem(item: typeof tabs[number]['items'][number]) {
   if (isArtist(item)) return <ArtistItem key={item.id} item={item} />;

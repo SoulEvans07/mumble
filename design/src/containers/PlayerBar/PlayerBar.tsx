@@ -1,35 +1,49 @@
-import { MouseEvent, ReactElement, useMemo } from 'react';
+import { CSSProperties, MouseEvent, ReactElement } from 'react';
 import './PlayerBar.scss';
 
-import { useDispatch } from '../../contexts/store/StoreContext';
-import { artists, tracks } from '../../types/mockData';
+import { useDispatch, useSelector } from '../../contexts/store/StoreContext';
 import { Icon } from '../../components/ui/Icon/Icon';
 import { CoverImage } from '../common/CoverImage/CoverImage';
-import { changePlayerVisibility } from '../../contexts/store/actions';
+import { changePlayerVisibility, pausePlay, resumePlay } from '../../contexts/store/actions';
+import { getPlayerBarState } from '../../contexts/store/selectors';
 
 export function PlayerBar(): ReactElement {
-  const [track, artist] = useMemo(() => {
-    const track = tracks[0];
-    const artist = artists.find(a => a.id === track.artistId);
-
-    return [track, artist];
-  }, [tracks, artists]);
-
   const dispatch = useDispatch();
+  const { hasPlaylist, isPlaying, track, artist, percent } = useSelector(getPlayerBarState);
+
+  if (!hasPlaylist) return <></>;
+
   const openPlayer = () => dispatch(changePlayerVisibility(true));
 
-  const onPlayPause = (e: MouseEvent) => {
+  const onPlay = (e: MouseEvent) => {
     e.stopPropagation();
+    dispatch(resumePlay());
   };
+
+  const onPause = (e: MouseEvent) => {
+    e.stopPropagation();
+    dispatch(pausePlay());
+  };
+
+  const progressStyle = { '--progress': `${percent}%` } as CSSProperties;
 
   return (
     <section className="player-bar" onClick={openPlayer}>
-      <CoverImage albumId={track.albumId} />
-      <div className="text-block">
-        <span className="title">{track.title}</span>
-        <span className="artist">{artist?.name || 'Unknown artist'}</span>
+      <div className="player-block">
+        <CoverImage albumId={track.albumId} />
+        <div className="text-block">
+          <span className="title">{track.title}</span>
+          <span className="artist">{artist?.name || 'Unknown artist'}</span>
+        </div>
+        {isPlaying ? (
+          <Icon icon="pause" className="play-icon" onClick={onPause} />
+        ) : (
+          <Icon icon="play" className="play-icon" onClick={onPlay} />
+        )}
       </div>
-      <Icon icon="play" className="play-icon" onClick={onPlayPause} />
+      <div className="timeline">
+        <div className="current-time" style={progressStyle} />
+      </div>
     </section>
   );
 }

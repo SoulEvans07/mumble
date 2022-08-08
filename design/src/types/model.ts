@@ -31,7 +31,7 @@ export class Track {
   albumId?: Album['id'];
   artistId?: Artist['id'];
 
-  constructor(public fileName: string, public title: string, album?: Album) {
+  constructor(public fileName: string, public title: string, public duration: number, album?: Album) {
     this.id = fileName;
     this.albumId = album?.id;
     this.artistId = album?.artistId;

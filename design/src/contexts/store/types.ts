@@ -13,6 +13,12 @@ export interface LibrarySlice {
 
 export interface PlayerSlice {
   isVisible: boolean;
+  current: {
+    trackIndex: number;
+    isPlaying: boolean;
+    playbackPosition: number; // millisec
+  } | null;
+  queue: Track[];
 }
 
 export interface StoreData {
@@ -25,6 +31,8 @@ export type StoreSelector<T> = (store: StoreData) => T;
 export const initialStoreData: StoreData = {
   player: {
     isVisible: false,
+    current: null,
+    queue: [],
   },
   library: {
     activeTab: 'Tracks',
