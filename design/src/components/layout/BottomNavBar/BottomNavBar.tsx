@@ -5,6 +5,7 @@ import './BottomNavBar.scss';
 
 import { Icon } from '../../ui/Icon/Icon';
 import { NavTab } from './types';
+import { PlayerBar } from '../PlayerBar/PlayerBar';
 
 interface BottomNavBarProps {
   tabs: NavTab[];
@@ -20,6 +21,7 @@ export function BottomNavBar(props: BottomNavBarProps): ReactElement {
   return (
     <>
       <Outlet />
+      <PlayerBar />
       <nav className="bottom-nav-bar">
         {tabs.map(tab => (
           <div
