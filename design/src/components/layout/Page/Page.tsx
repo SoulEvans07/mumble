@@ -8,8 +8,8 @@ export function Page(props: PropsWithChildren<PageProps>): ReactElement {
   const { children, className, ...restProps } = props;
 
   return (
-    <main className={classNames('page', className)} {...restProps}>
+    <section className={classNames('page', className)} {...restProps}>
       {children}
-    </main>
+    </section>
   );
 }

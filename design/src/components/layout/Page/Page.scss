@@ -2,7 +2,7 @@
   width: 100vw;
   height: 100vh;
   background-color: var(--color-dark-600);
-  color: var(--color-light-300);
+  color: var(--color-light-200);
   display: flex;
   flex-direction: column;
 }
@@ -18,7 +18,6 @@
   .page {
     background-position: center -100px;
     background-size: auto 400px;
-    background-image: var(--bg-mobile);
   }
 }
 

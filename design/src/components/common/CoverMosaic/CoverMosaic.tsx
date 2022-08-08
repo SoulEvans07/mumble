@@ -4,7 +4,7 @@ import './CoverMosaic.scss';
 import { albums } from '../../../types/mockData';
 import { Track } from '../../../types/model';
 import { CoverImage } from '../CoverImage/CoverImage';
-import { Random } from '../../../utils/Random';
+import { stringToHash } from '../../../utils/stringToHash';
 
 interface CoverMosaicProps {
   tracks: Track[];
@@ -25,12 +25,14 @@ export function CoverMosaic(props: CoverMosaicProps): ReactElement {
     return covers;
   }, [tracks, albums]);
 
+  const hues = useMemo(() => tracks.map(t => stringToHash(t.title) % 360), [tracks]);
+
   return (
     <div className="cover-mosaic">
-      <CoverImage src={topLeft} hue={Random.number(360)} />
-      <CoverImage src={topRight} hue={Random.number(360)} />
-      <CoverImage src={bottomLeft} hue={Random.number(360)} />
-      <CoverImage src={bottomRight} hue={Random.number(360)} />
+      <CoverImage src={topLeft} hue={hues[0]} />
+      <CoverImage src={topRight} hue={hues[1]} />
+      <CoverImage src={bottomLeft} hue={hues[2]} />
+      <CoverImage src={bottomRight} hue={hues[3]} />
     </div>
   );
 }
