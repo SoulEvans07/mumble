@@ -1,0 +1,22 @@
+.cover-image {
+  flex-shrink: 0;
+  height: 3rem;
+  width: 3rem;
+  margin-right: 0.5rem;
+  border-radius: 0.25rem;
+
+  &.cover-placeholder {
+    background-color: hsl(var(--hue, 0deg), var(--sat, 0%), var(--lit, 20%));
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .icon {
+      fill: hsl(0, 0, 100%);
+      opacity: 0.5;
+      height: 33%;
+      width: 33%;
+    }
+  }
+}

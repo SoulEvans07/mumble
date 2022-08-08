@@ -1,0 +1,22 @@
+.cover-mosaic {
+  flex-shrink: 0;
+  height: 3rem;
+  width: 3rem;
+  margin-right: 0.5rem;
+  border-radius: 0.25rem;
+  overflow: hidden;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+
+  .cover-image {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}

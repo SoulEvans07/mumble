@@ -1,0 +1,31 @@
+.album-item {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+
+  .cover-image {
+    width: 40vw;
+    height: 40vw;
+  }
+
+  .text-block {
+    padding: 0.25rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .title,
+    .artist {
+      overflow: hidden;
+    }
+
+    .title {
+      font-size: 1rem;
+    }
+
+    .artist {
+      font-size: 0.9rem;
+      opacity: 0.5;
+    }
+  }
+}

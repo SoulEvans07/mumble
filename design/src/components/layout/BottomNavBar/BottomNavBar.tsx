@@ -1,10 +1,10 @@
 import { ReactElement } from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import './BottomNavBar.scss';
 
 import { Icon } from '../../ui/Icon/Icon';
 import { NavTab } from './types';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 interface BottomNavBarProps {
   tabs: NavTab[];
@@ -20,7 +20,7 @@ export function BottomNavBar(props: BottomNavBarProps): ReactElement {
   return (
     <>
       <Outlet />
-      <section className="bottom-nav-bar">
+      <nav className="bottom-nav-bar">
         {tabs.map(tab => (
           <div
             className={classNames('tab-btn', { active: location.pathname === tab.path })}
@@ -31,7 +31,7 @@ export function BottomNavBar(props: BottomNavBarProps): ReactElement {
             <span className="title">{tab.title}</span>
           </div>
         ))}
-      </section>
+      </nav>
     </>
   );
 }
