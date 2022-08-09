@@ -39,7 +39,7 @@ export function Player(): ReactElement {
   const onRepeat = (mode: RepeatMode) => dispatch(setRepeatMode(mode));
   const onShuffle = () => dispatch(toggleShuffle());
 
-  const maskOffset = { '--offset': `${0}px` } as CSSProperties;
+  const maskOffset = { '--offset': `${0}rem` } as CSSProperties;
 
   return (
     <section className="player">
@@ -59,7 +59,7 @@ export function Player(): ReactElement {
       <section className="lyrics">
         <div className="line">You make me feel like a child, it's true</div>
         <div className="line">You make it seem like it is something brand new</div>
-        <div className="line">I've never met as agile as you</div>
+        <div className="line current">I've never met as agile as you</div>
         <div className="line">You have a way with doing the things you do, yeah</div>
         <div className="line">You have a way with doing the things you do, yeah</div>
         <div className="line">You have a way with doing the things you do, yeah</div>
