@@ -1,4 +1,4 @@
-import { CSSProperties, MouseEvent, ReactElement, useMemo, useState } from 'react';
+import { CSSProperties, MouseEvent, ReactElement, TouchEvent, useMemo, useState } from 'react';
 import './Player.scss';
 
 import { useDispatch, useSelector } from '../../contexts/store/StoreContext';
@@ -63,8 +63,32 @@ export function Player(): ReactElement {
     }
   };
 
+  const onTouchDragStart = (e: TouchEvent) => {
+    setDragging(true);
+    setPosY(e.touches[0].clientY);
+  };
+  const onTouchDragStop = () => {
+    setDragging(false);
+    setPosY(undefined);
+    if (offset > min / 2) setOffset(max);
+    else setOffset(min);
+  };
+  const onTouchDrag = (e: TouchEvent) => {
+    if (dragging && posY !== undefined) {
+      setPosY(e.touches[0].clientY);
+      setOffset(prev => Math.min(Math.max(prev + posY - e.touches[0].clientY, min), max));
+    }
+  };
+
   return (
-    <section className="player" onMouseMove={onDrag} onMouseUp={onDragStop} onMouseLeave={onDragStop}>
+    <section
+      className="player"
+      onMouseMove={onDrag}
+      onMouseUp={onDragStop}
+      onMouseLeave={onDragStop}
+      onTouchMove={onTouchDrag}
+      onTouchEnd={onTouchDragStop}
+    >
       <header>
         <Icon icon="chevron-down" className="close-btn" onClick={onBack} />
         <div className="track-block">
@@ -90,7 +114,7 @@ export function Player(): ReactElement {
       </section>
       <div className="mask" style={maskOffset} />
       <section className="controls" style={maskOffset}>
-        <div className="controls-handle" onMouseDown={onDragStart}>
+        <div className="controls-handle" onMouseDown={onDragStart} onTouchStart={onTouchDragStart}>
           <div className="handle" />
         </div>
         <div className="timeline">
