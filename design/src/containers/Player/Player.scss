@@ -94,6 +94,7 @@
     color: white;
     font-weight: bold;
     padding: 0 1rem;
+    z-index: 108;
 
     .line {
       opacity: 0.5;
@@ -105,9 +106,19 @@
     }
   }
 
+  .mask {
+    position: fixed;
+    inset: 0;
+    z-index: 109;
+    background: linear-gradient(to bottom, #141c2f, #213b54);
+    mask-image: url("./mask-long.png");
+    mask-position: 0 calc(-1 * var(--offset, 0));
+    mask-repeat: no-repeat;
+  }
+
   .controls {
     position: fixed;
-    bottom: 0;
+    bottom: var(--offset, 0);
     left: 0;
     right: 0;
 
@@ -148,7 +159,7 @@
         justify-content: space-between;
 
         font-size: 0.8rem;
-        opacity: 0.5;
+        opacity: 0.3;
       }
     }
 

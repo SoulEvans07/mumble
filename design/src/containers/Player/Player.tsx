@@ -39,6 +39,8 @@ export function Player(): ReactElement {
   const onRepeat = (mode: RepeatMode) => dispatch(setRepeatMode(mode));
   const onShuffle = () => dispatch(toggleShuffle());
 
+  const maskOffset = { '--offset': `${0}px` } as CSSProperties;
+
   return (
     <section className="player">
       <header>
@@ -53,13 +55,20 @@ export function Player(): ReactElement {
         <Icon icon="heart" className="fav-btn" />
       </header>
       <div className="background" />
+
       <section className="lyrics">
         <div className="line">You make me feel like a child, it's true</div>
-        <div className="line current">You make it seem like it is something brand new</div>
+        <div className="line">You make it seem like it is something brand new</div>
         <div className="line">I've never met as agile as you</div>
         <div className="line">You have a way with doing the things you do, yeah</div>
+        <div className="line">You have a way with doing the things you do, yeah</div>
+        <div className="line">You have a way with doing the things you do, yeah</div>
+        <div className="line">You have a way with doing the things you do, yeah</div>
+        <div className="line">You have a way with doing the things you do, yeah</div>
+        <div className="line">You have a way with doing the things you do, yeah</div>
       </section>
-      <section className="controls">
+      <div className="mask" style={maskOffset} />
+      <section className="controls" style={maskOffset}>
         <div className="timeline">
           <div className="slider">
             <div className="knob" style={progressStyle} />
