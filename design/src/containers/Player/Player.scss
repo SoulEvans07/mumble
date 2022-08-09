@@ -135,12 +135,12 @@
         margin-bottom: 0.8rem;
 
         .knob {
-          --size: 1rem;
+          --icon-size: 1rem;
           position: absolute;
-          top: calc((var(--height) - var(--size)) * 0.5);
-          left: calc(var(--progress, 0%) - var(--size) * 0.5);
-          height: var(--size);
-          width: var(--size);
+          top: calc((var(--height) - var(--icon-size)) * 0.5);
+          left: calc(var(--progress, 0%) - var(--icon-size) * 0.5);
+          height: var(--icon-size);
+          width: var(--icon-size);
           border-radius: 100%;
           background-color: hsla(0, 0%, 100%, 1);
         }
@@ -176,7 +176,7 @@
 
       .shuffle-btn,
       .repeat-btn {
-        --size: 1.25rem;
+        --icon-size: 1.25rem;
       }
 
       .prev-btn,
@@ -197,6 +197,44 @@
         width: 3rem;
         height: 3rem;
         margin: 0 1rem;
+      }
+    }
+
+    .bottom-menus {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1.5rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+
+      .btn {
+        --btn-size: 2.5rem;
+        --icon-size: 1.25rem;
+        padding: calc((var(--btn-size) - var(--icon-size)) * 0.5);
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: var(--btn-size);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .icon {
+          fill: white;
+          flex-shrink: 0;
+
+          width: var(--icon-size);
+          height: var(--icon-size);
+        }
+
+        &.center {
+          line-height: var(--icon-size);
+          font-weight: bold;
+          font-size: 1rem;
+          --pad: 1.5rem;
+          padding-left: var(--pad);
+          padding-right: var(--pad);
+        }
       }
     }
   }

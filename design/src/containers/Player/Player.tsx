@@ -100,6 +100,15 @@ export function Player(): ReactElement {
             onChange={onRepeat}
           />
         </div>
+        <div className="bottom-menus">
+          <div className="btn">
+            <Icon icon="ellipsis" />
+          </div>
+          <div className="btn center">Lyrics</div>
+          <div className="btn">
+            <Icon icon="queue-list" />
+          </div>
+        </div>
       </section>
     </section>
   );
