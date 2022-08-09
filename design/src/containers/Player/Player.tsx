@@ -1,4 +1,4 @@
-import { CSSProperties, ReactElement } from 'react';
+import { CSSProperties, MouseEvent, ReactElement, useMemo, useState } from 'react';
 import './Player.scss';
 
 import { useDispatch, useSelector } from '../../contexts/store/StoreContext';
@@ -24,6 +24,11 @@ export function Player(): ReactElement {
 
   const { isPlaying, track, artist, percent, position, duration, shuffle, repeat } = useSelector(getPlayerState);
 
+  const [dragging, setDragging] = useState(false);
+  const [posY, setPosY] = useState<number | undefined>(0);
+  const [offset, setOffset] = useState(0);
+  const maskOffset = useMemo(() => ({ '--offset': `${offset}px` } as CSSProperties), [offset]);
+
   if (!isVisible || !track) return <></>;
 
   const onBack = () => dispatch(changePlayerVisibility(false));
@@ -39,10 +44,27 @@ export function Player(): ReactElement {
   const onRepeat = (mode: RepeatMode) => dispatch(setRepeatMode(mode));
   const onShuffle = () => dispatch(toggleShuffle());
 
-  const maskOffset = { '--offset': `${0}rem` } as CSSProperties;
+  const min = -195;
+  const max = 0;
+  const onDragStart = (e: MouseEvent) => {
+    setDragging(true);
+    setPosY(e.clientY);
+  };
+  const onDragStop = () => {
+    setDragging(false);
+    setPosY(undefined);
+    if (offset > min / 2) setOffset(max);
+    else setOffset(min);
+  };
+  const onDrag = (e: MouseEvent) => {
+    if (dragging && posY !== undefined) {
+      setPosY(e.clientY);
+      setOffset(prev => Math.min(Math.max(prev + posY - e.clientY, min), max));
+    }
+  };
 
   return (
-    <section className="player">
+    <section className="player" onMouseMove={onDrag} onMouseUp={onDragStop} onMouseLeave={onDragStop}>
       <header>
         <Icon icon="chevron-down" className="close-btn" onClick={onBack} />
         <div className="track-block">
@@ -55,7 +77,6 @@ export function Player(): ReactElement {
         <Icon icon="heart" className="fav-btn" />
       </header>
       <div className="background" />
-
       <section className="lyrics">
         <div className="line">You make me feel like a child, it's true</div>
         <div className="line">You make it seem like it is something brand new</div>
@@ -69,6 +90,9 @@ export function Player(): ReactElement {
       </section>
       <div className="mask" style={maskOffset} />
       <section className="controls" style={maskOffset}>
+        <div className="controls-handle" onMouseDown={onDragStart}>
+          <div className="handle" />
+        </div>
         <div className="timeline">
           <div className="slider">
             <div className="knob" style={progressStyle} />
