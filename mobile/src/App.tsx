@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-
 import * as DocumentPicker from 'expo-document-picker';
 
 import { AudioProvider } from './contexts/audio/AudioContext';
-import { SongQueue } from './components/SongQueue/SongQueue';
+import { AppNavigator } from './navigation/App.navigator';
 
 export default function App() {
   const [sound, setSound] = useState();
@@ -15,19 +13,7 @@ export default function App() {
 
   return (
     <AudioProvider>
-      <View style={styles.container}>
-        <Text>Open up App.tsx to start working on your app!</Text>
-        <SongQueue />
-      </View>
+      <AppNavigator />
     </AudioProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
