@@ -28,7 +28,7 @@ export function LibraryScreen(): ReactElement {
   return (
     <Page className="library-screen">
       <header>
-        <h1>Music</h1>
+        <h1>Library</h1>
       </header>
       <nav className="top-tab">
         {tabs.map(tab => (
