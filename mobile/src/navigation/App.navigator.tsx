@@ -13,6 +13,7 @@ import { BottomTab } from '../components/layout/BottomTab/BottomTab';
 import House from '../components/ui/svg/house.svg';
 import AlbumCollection from '../components/ui/svg/album-collection.svg';
 import MagnifyingGlass from '../components/ui/svg/magnifying-glass.svg';
+import { PlayerBar } from '../containers/PlayerBar';
 
 const AppTabNavigator = createBottomTabNavigator<RootTabParamList>();
 
@@ -35,6 +36,7 @@ export function AppNavigator(): ReactElement {
         <AppTabNavigator.Screen name="Library" component={LibraryScreen} />
         <AppTabNavigator.Screen name="Search" component={SearchScreen} />
       </AppTabNavigator.Navigator>
+      <PlayerBar />
     </NavigationContainer>
   );
 }
