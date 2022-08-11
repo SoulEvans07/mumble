@@ -18,5 +18,8 @@
     "turbo": "latest",
     "typescript": "~4.3.5"
   },
+  "resolutions": {
+    "@types/react": "17.0.48"
+  },
   "packageManager": "yarn@1.22.17"
 }
