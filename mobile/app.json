@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "mobile",
-    "slug": "mobile",
+    "name": "mumble",
+    "slug": "mumble",
+    "owner": "soulevans07",
     "version": "1.0.0",
     "orientation": "portrait",
     "entryPoint": "./src/index.ts",
@@ -17,6 +18,16 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
+    "plugins": [
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos.",
+          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
