@@ -1,0 +1,15 @@
+{
+  "common": {
+    "resourceList": {
+      "empty": "A lista üres"
+    },
+    "hiperlink": {
+      "unsuccessfulMessage": "Nem sikerült megnyitni az oldalt."
+    },
+    "errorBoundary": {
+      "title": "Nyeh...",
+      "description": "Semmi se tökéletes, de már tudunk a hibáról.",
+      "accept": "Beletörődés"
+    }
+  }
+}
