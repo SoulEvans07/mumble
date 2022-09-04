@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as DocumentPicker from 'expo-document-picker';
@@ -13,6 +14,10 @@ export default function App() {
   const findSong = async () => {
     const song = DocumentPicker.getDocumentAsync({ copyToCacheDirectory: true, multiple: false });
   };
+
+  useEffect(() => {
+    StatusBar.setBarStyle('light-content');
+  }, []);
 
   return (
     <SafeAreaProvider>

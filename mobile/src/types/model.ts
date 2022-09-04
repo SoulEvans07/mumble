@@ -1,4 +1,6 @@
+import { MediaAsset } from './media';
 import { Random } from '../utils/Random';
+import { Longest } from 'reselect/es/types';
 
 export class Artist {
   _type = 'artist';
@@ -25,16 +27,28 @@ export function isAlbum(obj: any): obj is Album {
   return '_type' in obj && obj._type === 'album';
 }
 
-export class Track {
-  _type = 'track';
+export interface Track {
+  _type: 'track';
   id: string;
+  title: string;
+  duration: number;
+  asset: MediaAsset;
   albumId?: Album['id'];
   artistId?: Artist['id'];
+}
 
-  constructor(public fileName: string, public title: string, public duration: number, album?: Album) {
-    this.id = fileName;
-    this.albumId = album?.id;
-    this.artistId = album?.artistId;
+export class Track {
+  static from(asset: MediaAsset): Track {
+    const dot = asset.filename.lastIndexOf('.');
+    return {
+      asset,
+      _type: 'track',
+      id: asset.id,
+      title: asset.filename.slice(0, dot),
+      duration: asset.duration * 1000,
+      albumId: undefined,
+      artistId: undefined,
+    };
   }
 }
 
@@ -45,11 +59,11 @@ export function isTrack(obj: any): obj is Track {
 export class Playlist {
   _type = 'playlist';
   id: string;
-  items: Track['fileName'][];
+  items: Track['id'][];
 
   constructor(public title: string, items: Track[] = []) {
     this.id = Random.uuid();
-    this.items = items.map(i => i.fileName);
+    this.items = items.map(i => i.id);
   }
 }
 
