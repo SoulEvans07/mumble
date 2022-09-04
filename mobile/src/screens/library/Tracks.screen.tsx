@@ -1,12 +1,12 @@
-import { ReactElement, useEffect, useState } from 'react';
-import { Image, Text, View, ScrollView, StyleSheet, RefreshControl } from 'react-native';
+import { ReactElement, useEffect } from 'react';
+import { Text, View, ScrollView, StyleSheet, RefreshControl, Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { millisToMin } from '../../utils/timeUtils';
-import { Track } from '../../types/model';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { selectTracks } from '../../store/player/selectors';
+import { selectTracks } from '../../store/library/selectors';
 import { fetchTracks } from '../../store/library/thunk.actions';
+import { playerActions } from '../../store/player';
 
 export function TracksLibraryTab(): ReactElement {
   const { top } = useSafeAreaInsets();
@@ -17,8 +17,12 @@ export function TracksLibraryTab(): ReactElement {
   const refresh = async () => dispatch(fetchTracks());
 
   useEffect(() => {
-    refresh();
-  }, []);
+    if (status === 'idle') refresh();
+  }, [status]);
+
+  const playTrack = (index: number) => () => {
+    dispatch(playerActions.setQueue({ queue: Object.values(tracks), index }));
+  };
 
   return (
     <ScrollView
@@ -26,12 +30,11 @@ export function TracksLibraryTab(): ReactElement {
       refreshControl={<RefreshControl refreshing={status === 'loading'} onRefresh={refresh} />}
     >
       {/* TODO: error handling */}
-      {Object.values(tracks).map(item => (
-        <View key={item.id}>
+      {Object.values(tracks).map((item, index) => (
+        <Pressable key={item.id} onPress={playTrack(index)}>
           <Text>{item.title}</Text>
-          <Text>{item.asset.uri}</Text>
           <Text>{millisToMin(item.duration)}</Text>
-        </View>
+        </Pressable>
       ))}
     </ScrollView>
   );

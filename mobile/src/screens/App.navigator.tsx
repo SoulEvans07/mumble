@@ -8,12 +8,13 @@ import AlbumCollection from '../components/ui/svg/album-collection.svg';
 import MagnifyingGlass from '../components/ui/svg/magnifying-glass.svg';
 
 import { RootTabParamList } from './types';
-import { HomeScreen } from '../screens/Home.screen';
-import { LibraryNavigator } from './Library.navigator';
-import { SearchScreen } from '../screens/Search.screen';
+import { HomeScreen } from './Home.screen';
+import { LibraryNavigator } from './library/Library.navigator';
+import { SearchScreen } from './Search.screen';
 import { PlayerBar } from '../containers/PlayerBar';
 import { BottomTabItem } from '../components/layout/BottomTab/types';
 import { BottomTab } from '../components/layout/BottomTab/BottomTab';
+import { Player } from '../containers/Player/Player';
 
 const AppTabNavigator = createBottomTabNavigator<RootTabParamList>();
 
@@ -37,6 +38,7 @@ export function AppNavigator(): ReactElement {
         <AppTabNavigator.Screen name="Search" component={SearchScreen} />
       </AppTabNavigator.Navigator>
       <PlayerBar />
+      <Player />
     </NavigationContainer>
   );
 }

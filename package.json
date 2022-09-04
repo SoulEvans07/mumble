@@ -2,12 +2,18 @@
   "name": "mumble",
   "version": "0.1.0",
   "private": true,
-  "workspaces": [
-    "design",
-    "mobile",
-    "desktop",
-    "shared/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "design",
+      "mobile",
+      "desktop",
+      "shared/*"
+    ],
+    "nohoist": [
+      "**/expo",
+      "**/expo/**"
+    ]
+  },
   "scripts": {
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
