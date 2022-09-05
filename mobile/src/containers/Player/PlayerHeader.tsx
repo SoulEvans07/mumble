@@ -1,8 +1,9 @@
-import { ReactElement } from 'react';
-import { Image, Modal, Pressable, Text, View, SafeAreaView, StyleSheet } from 'react-native';
+import React, { ReactElement } from 'react';
+import { Pressable, Text, View, StyleSheet } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { Track } from '../../types/model';
+import { CoverImage } from '../common/CoverImage';
 
 interface PlayerHeaderProps {
   track: Track;
@@ -17,7 +18,7 @@ export function PlayerHeader(props: PlayerHeaderProps): ReactElement {
       <Pressable onPress={onClose} style={styles.closeBtn}>
         <Ionicons name="chevron-down" size={32} color="white" />
       </Pressable>
-      <View style={styles.albumCover}></View>
+      <CoverImage albumId={track.albumId} size="36" style={{ marginRight: 10 }} />
       <View style={styles.trackData}>
         <Text numberOfLines={1} style={styles.title}>
           {track.title}
@@ -41,14 +42,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: 50,
-  },
-  albumCover: {
-    borderRadius: 5,
-    width: coverSize,
-    height: coverSize,
-    marginRight: 10,
-    backgroundColor: 'blue',
-    opacity: 0.5,
   },
   trackData: {
     flex: 1,

@@ -1,4 +1,5 @@
-import { createSlice, isPlain, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { currentFrom } from './helpers';
 import { PlayerState, RepeatMode, SetQueuePayload } from './types';
 

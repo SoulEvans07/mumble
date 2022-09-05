@@ -1,10 +1,11 @@
-import { ReactElement, useMemo } from 'react';
-import { Text, View, StyleSheet, Pressable, GestureResponderEvent } from 'react-native';
-import { IconSwitch } from '../components/control/IconSwitch';
+import React, { ReactElement, useMemo } from 'react';
+import { Text, View, StyleSheet, Pressable } from 'react-native';
 
+import { IconSwitch } from '../components/control/IconSwitch';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { playerActions } from '../store/player';
 import { selectCurrentUnsafe } from '../store/player/selectors';
+import { CoverImage } from './common/CoverImage';
 
 export function PlayerBar(): ReactElement | null {
   const { track, playbackPosition, isPlaying } = useAppSelector(selectCurrentUnsafe);
@@ -20,7 +21,7 @@ export function PlayerBar(): ReactElement | null {
   return (
     <Pressable style={styles.playerBar} onPress={openPlayer}>
       <View style={styles.trackBlock}>
-        <View style={styles.albumCover}></View>
+        <CoverImage albumId={track.albumId} size="40" style={{ marginRight: 10 }} />
         <View style={styles.textBlock}>
           <Text style={styles.title}>{track.title}</Text>
           <Text style={styles.artist}>Unknown artist</Text>
@@ -61,14 +62,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal,
-  },
-  albumCover: {
-    borderRadius: 5,
-    width: coverSize,
-    height: coverSize,
-    marginRight: 10,
-    backgroundColor: 'blue',
-    opacity: 0.5,
   },
   textBlock: {
     flexDirection: 'column',

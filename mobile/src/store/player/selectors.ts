@@ -14,6 +14,7 @@ const placeholderTrack: Track = {
   id: placeholderTrackId,
   title: 'Loading Track...',
   duration: 0,
+  durationMillis: 0,
   asset: {
     id: placeholderTrackId,
     filename: `${placeholderTrackId}.mp3`,
