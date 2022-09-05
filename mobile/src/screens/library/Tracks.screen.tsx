@@ -5,11 +5,13 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectTracks } from '../../store/library/selectors';
 import { fetchTracks } from '../../store/library/thunk.actions';
 import { playerActions } from '../../store/player';
-import { CoverImage } from '../../containers/common/CoverImage';
+import { TrackItem } from '../../containers/common/TrackItem';
+import { selectCurrent } from '../../store/player/selectors';
 
 export function TracksLibraryTab(): ReactElement {
   const dispatch = useAppDispatch();
   const { status, data: tracks, error } = useAppSelector(selectTracks);
+  const current = useAppSelector(selectCurrent);
 
   const refresh = async () => dispatch(fetchTracks());
 
@@ -24,31 +26,12 @@ export function TracksLibraryTab(): ReactElement {
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={{ padding: 10 }}
+      contentContainerStyle={[styles.content, { paddingBottom: current ? 50 : 10 }]}
       refreshControl={<RefreshControl refreshing={status === 'loading'} onRefresh={refresh} />}
     >
       {/* TODO: error handling */}
       {Object.values(tracks).map((item, index) => (
-        <Pressable
-          key={item.id}
-          onPress={playTrack(index)}
-          style={{
-            flexDirection: 'row',
-            paddingBottom: 10,
-            alignItems: 'center',
-            overflow: 'hidden',
-          }}
-        >
-          <CoverImage albumId={item.albumId} size="48" style={{ marginRight: 10 }} />
-          <View style={{ flexDirection: 'column', flex: 1, overflow: 'hidden' }}>
-            <Text style={styles.title} numberOfLines={1}>
-              {item.title}
-            </Text>
-            <Text style={styles.artist} numberOfLines={1}>
-              Unknown artist
-            </Text>
-          </View>
-        </Pressable>
+        <TrackItem item={item} onPress={playTrack(index)} />
       ))}
     </ScrollView>
   );
@@ -59,10 +42,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  title: {
-    color: 'white',
-  },
-  artist: {
-    color: '#ffffff80',
+  content: {
+    paddingVertical: 10,
+    paddingHorizontal: 15,
   },
 });

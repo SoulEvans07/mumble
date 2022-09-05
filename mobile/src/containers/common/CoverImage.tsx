@@ -37,6 +37,7 @@ export function CoverImage(props: CoverImageProps): ReactElement {
   const imageStyle: ImageStyle = {
     width: size,
     height: size,
+    borderRadius: borderRadiusToSize(size),
   };
 
   return image ? (
@@ -54,6 +55,7 @@ function FallbackCoverImage(props: CoverImageBaseProps) {
     backgroundColor: hue !== undefined ? `hsl(${hue}, 40%, 40%)` : 'hsl(0, 0%, 20%)',
     width: size,
     height: size,
+    borderRadius: borderRadiusToSize(size),
   };
 
   return (
@@ -63,13 +65,10 @@ function FallbackCoverImage(props: CoverImageBaseProps) {
   );
 }
 
-const borderRadius = 5;
+const borderRadiusToSize = (size: number) => size / 8;
 const styles = StyleSheet.create({
-  image: {
-    borderRadius,
-  },
+  image: {},
   fallbackContainer: {
-    borderRadius,
     alignItems: 'center',
     justifyContent: 'center',
   },
