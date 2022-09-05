@@ -23,8 +23,12 @@ export function PlayerBar(): ReactElement | null {
       <View style={styles.trackBlock}>
         <CoverImage albumId={track.albumId} size="40" style={{ marginRight: 10 }} />
         <View style={styles.textBlock}>
-          <Text style={styles.title}>{track.title}</Text>
-          <Text style={styles.artist}>Unknown artist</Text>
+          <Text style={styles.title} numberOfLines={1}>
+            {track.title}
+          </Text>
+          <Text style={styles.artist} numberOfLines={1}>
+            Unknown artist
+          </Text>
         </View>
         <Pressable style={styles.playPauseIcon} onPress={playOrPause}>
           <IconSwitch
