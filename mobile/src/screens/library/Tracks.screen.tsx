@@ -32,8 +32,12 @@ export function TracksLibraryTab(): ReactElement {
       {/* TODO: error handling */}
       {Object.values(tracks).map((item, index) => (
         <Pressable key={item.id} onPress={playTrack(index)}>
-          <Text>{item.title}</Text>
-          <Text>{millisToMin(item.duration)}</Text>
+          <Text style={styles.title} numberOfLines={1}>
+            {item.title}
+          </Text>
+          <Text style={styles.artist} numberOfLines={1}>
+            Unknown artist
+          </Text>
         </Pressable>
       ))}
     </ScrollView>
@@ -44,5 +48,11 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
+  },
+  title: {
+    color: 'white',
+  },
+  artist: {
+    color: '#ffffff80',
   },
 });

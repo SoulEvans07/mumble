@@ -1,7 +1,7 @@
 import { Track } from '../../types/model';
 import { RootState } from '../index';
 
-const selectPlayerDomain = (state: RootState) => state.player;
+export const selectPlayerDomain = (state: RootState) => state.player;
 
 export const selectPlayerVisibility = (state: RootState) => {
   const { isVisible, current } = selectPlayerDomain(state);
@@ -29,9 +29,15 @@ const placeholderTrack: Track = {
   },
 };
 
-export const selectCurrentTrackPlaceholder = (state: RootState) => {
+export const selectCurrentTrack = (state: RootState) => {
   const { current, queue } = selectPlayerDomain(state);
   if (!current) return placeholderTrack;
+  return queue[current.trackIndex];
+};
+
+export const selectCurrentTrackUnsafe = (state: RootState) => {
+  const { current, queue } = selectPlayerDomain(state);
+  if (!current) throw new Error('No Current Track');
   return queue[current.trackIndex];
 };
 
@@ -41,8 +47,8 @@ export const selectCurrent = (state: RootState) => {
   return { ...current, track: queue[current.trackIndex] };
 };
 
-export const selectCurrentTrack = (state: RootState) => {
+export const selectCurrentUnsafe = (state: RootState) => {
   const { current, queue } = selectPlayerDomain(state);
-  if (!current) return null;
-  return queue[current.trackIndex];
+  if (!current) throw new Error('No Current Track');
+  return { ...current, track: queue[current.trackIndex] };
 };
