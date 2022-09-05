@@ -32,7 +32,7 @@ export function AppNavigator(): ReactElement {
   return (
     <NavigationContainer>
       <AppTabNavigator.Navigator
-        initialRouteName="Home"
+        initialRouteName="Library"
         screenOptions={{ headerShown: false, unmountOnBlur: true }}
         tabBar={props => <BottomTab tabs={tabs} {...props} />}
         sceneContainerStyle={{ backgroundColor: 'transparent' }}
