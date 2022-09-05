@@ -22,7 +22,7 @@ export function LibraryNavigator(): ReactElement {
         initialRouteName={initialRouteName}
         screenOptions={{
           tabBarScrollEnabled: true,
-          tabBarStyle: { backgroundColor: '#1e1e1e' },
+          tabBarStyle: { backgroundColor: 'transparent' },
           tabBarItemStyle: { width: 100, padding: 0 },
           tabBarActiveTintColor: 'white',
           tabBarIndicatorStyle: { backgroundColor: '#fd5451' },
@@ -46,7 +46,7 @@ export function LibraryNavigator(): ReactElement {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#1e1e1e',
+    backgroundColor: 'black',
     flex: 1,
   },
   header: {

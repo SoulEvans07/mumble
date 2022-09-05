@@ -50,7 +50,6 @@ export function PlayerBar(): ReactElement | null {
 
 const paddingHorizontal = 10;
 const height = 50;
-const coverSize = 40;
 const timelineHeight = 2;
 const styles = StyleSheet.create({
   playerBar: {
@@ -58,7 +57,8 @@ const styles = StyleSheet.create({
     zIndex: 10,
     left: 0,
     right: 0,
-    bottom: height, // + timelineHeight,
+    bottom: height,
+    height: height + timelineHeight,
     backgroundColor: 'hsl(226, 17%, 15%)',
   },
   trackBlock: {

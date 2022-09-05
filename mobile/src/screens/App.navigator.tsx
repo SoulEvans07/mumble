@@ -21,9 +21,9 @@ import { selectCurrent } from '../store/player/selectors';
 const AppTabNavigator = createBottomTabNavigator<RootTabParamList>();
 
 const tabs: BottomTabItem[] = [
-  { to: 'Home', title: 'Home', icon: House },
-  { to: 'Library', title: 'Library', icon: AlbumCollection },
-  { to: 'Search', title: 'Search', icon: MagnifyingGlass },
+  { to: 'Home', title: 'Home', icon: 'house' },
+  { to: 'Library', title: 'Library', icon: 'album-collection' },
+  { to: 'Search', title: 'Search', icon: 'magnifying-glass' },
 ];
 
 export function AppNavigator(): ReactElement {
