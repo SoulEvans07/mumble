@@ -32,6 +32,7 @@ export interface Track {
   id: string;
   title: string;
   duration: number;
+  durationMillis: number;
   asset: MediaAsset;
   albumId?: Album['id'];
   artistId?: Artist['id'];
@@ -45,7 +46,8 @@ export class Track {
       _type: 'track',
       id: asset.id,
       title: asset.filename.slice(0, dot),
-      duration: asset.duration * 1000,
+      duration: asset.duration,
+      durationMillis: asset.duration * 1000,
       albumId: undefined,
       artistId: undefined,
     };

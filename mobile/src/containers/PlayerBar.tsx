@@ -1,24 +1,21 @@
-import { ReactElement } from 'react';
+import { ReactElement, useMemo } from 'react';
 import { Text, View, StyleSheet, Pressable, GestureResponderEvent } from 'react-native';
-
-import Play from '../components/ui/svg/play.svg';
+import { IconSwitch } from '../components/control/IconSwitch';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { playerActions } from '../store/player';
-import { selectCurrent } from '../store/player/selectors';
+import { selectCurrentUnsafe } from '../store/player/selectors';
 
 export function PlayerBar(): ReactElement | null {
-  const current = useAppSelector(selectCurrent);
+  const { track, playbackPosition, isPlaying } = useAppSelector(selectCurrentUnsafe);
 
   const dispatch = useAppDispatch();
   const openPlayer = () => dispatch(playerActions.setVisibility(true));
+  const playOrPause = () => dispatch(playerActions.playOrPause());
 
-  if (!current) return null;
-  const { track } = current;
-
-  const playOrPause = (event: GestureResponderEvent) => {
-    event.stopPropagation();
-  };
+  const progressWidth = useMemo(() => {
+    return `${(playbackPosition / track.duration) * 100}%`;
+  }, [track.duration, playbackPosition]);
 
   return (
     <Pressable style={styles.playerBar} onPress={openPlayer}>
@@ -29,11 +26,18 @@ export function PlayerBar(): ReactElement | null {
           <Text style={styles.artist}>Unknown artist</Text>
         </View>
         <Pressable style={styles.playPauseIcon} onPress={playOrPause}>
-          <Play width={28} height={28} fill="white" />
+          <IconSwitch
+            activeIcon="pause"
+            inactiveIcon="play"
+            size="36"
+            ratio="0.7"
+            active={isPlaying}
+            onSwitch={playOrPause}
+          />
         </Pressable>
       </View>
       <View style={styles.timeline}>
-        <View style={[styles.progressBar, { width: 50 }]} />
+        <View style={[styles.progressBar, { width: progressWidth }]} />
       </View>
     </Pressable>
   );

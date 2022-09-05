@@ -15,6 +15,8 @@ import { PlayerBar } from '../containers/PlayerBar';
 import { BottomTabItem } from '../components/layout/BottomTab/types';
 import { BottomTab } from '../components/layout/BottomTab/BottomTab';
 import { Player } from '../containers/Player/Player';
+import { useAppSelector } from '../store/hooks';
+import { selectCurrent } from '../store/player/selectors';
 
 const AppTabNavigator = createBottomTabNavigator<RootTabParamList>();
 
@@ -25,6 +27,8 @@ const tabs: BottomTabItem[] = [
 ];
 
 export function AppNavigator(): ReactElement {
+  const current = useAppSelector(selectCurrent);
+
   return (
     <NavigationContainer>
       <AppTabNavigator.Navigator
@@ -37,8 +41,8 @@ export function AppNavigator(): ReactElement {
         <AppTabNavigator.Screen name="Library" component={LibraryNavigator} />
         <AppTabNavigator.Screen name="Search" component={SearchScreen} />
       </AppTabNavigator.Navigator>
-      <PlayerBar />
-      <Player />
+      {!!current && <PlayerBar />}
+      {!!current && <Player />}
     </NavigationContainer>
   );
 }

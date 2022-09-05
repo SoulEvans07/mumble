@@ -3,12 +3,14 @@ import { Modal, View, StyleSheet } from 'react-native';
 
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { playerActions } from '../../store/player';
-import { selectCurrentTrackPlaceholder, selectPlayerVisibility } from '../../store/player/selectors';
+import { selectCurrentUnsafe, selectPlayerVisibility } from '../../store/player/selectors';
+import { LyricViewer } from './LyricViewer';
+import { PlayerControls } from './PlayerControls';
 import { PlayerHeader } from './PlayerHeader';
 
 export function Player(): ReactElement {
   const visible = useAppSelector(selectPlayerVisibility);
-  const currentTrack = useAppSelector(selectCurrentTrackPlaceholder);
+  const { track } = useAppSelector(selectCurrentUnsafe);
 
   const dispatch = useAppDispatch();
   const closePlayer = () => dispatch(playerActions.setVisibility(false));
@@ -16,7 +18,9 @@ export function Player(): ReactElement {
   return (
     <Modal visible={visible} transparent={true} animationType="slide">
       <View style={styles.container}>
-        <PlayerHeader track={currentTrack} onClose={closePlayer} />
+        <PlayerHeader track={track} onClose={closePlayer} />
+        <LyricViewer />
+        <PlayerControls />
       </View>
     </Modal>
   );
