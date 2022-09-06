@@ -1,5 +1,5 @@
 {
-  "name": "mobile",
+  "name": "mumble",
   "version": "1.0.0",
   "main": "./index.ts",
   "scripts": {
@@ -8,7 +8,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "build:android": "eas build --profile development --platform android",
+    "build:android:prod": "eas build --platform android"
   },
   "jest": {
     "preset": "jest-expo"
@@ -21,6 +23,7 @@
     "expo": "~45.0.0",
     "expo-asset": "~8.5.0",
     "expo-constants": "~13.1.1",
+    "expo-dev-client": "~1.0.1",
     "expo-font": "~10.1.0",
     "expo-linking": "~3.1.0",
     "expo-splash-screen": "~0.15.1",

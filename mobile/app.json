@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "mobile",
-    "slug": "mobile",
+    "name": "mumble",
+    "slug": "mumble",
     "version": "1.0.0",
     "orientation": "portrait",
     "entryPoint": "./src/index.ts",
     "icon": "./src/assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "io.mumble.mobile",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./src/assets/images/splash.png",
@@ -23,13 +23,25 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "io.mumble.mobile.dev",
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_MEDIA_LOCATION"
+      ],
+      "versionCode": 2
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "deae4098-7bd6-48d0-b489-db9e81bfd0f6"
+      }
     }
   }
 }
