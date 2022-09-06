@@ -12,4 +12,4 @@ export type LibraryTabParamList = {
   Playlists: undefined;
 };
 
-export const useBottomTabNavigation = useNavigation<BottomTabNavigationProp<RootTabParamList>>;
+export const useBottomTabNavigation = () => useNavigation<BottomTabNavigationProp<RootTabParamList>>();

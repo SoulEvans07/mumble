@@ -11,12 +11,8 @@ export interface IconProps extends Omit<SvgProps, 'width' | 'height' | 'color'> 
 }
 
 export function Icon(props: IconProps): ReactElement {
-  const { name, size = 24, style, ...restProps } = props;
+  const { name, size = 24, ...restProps } = props;
   const IconComp = SVGs[name];
 
-  return <IconComp width={Number(size)} height={Number(size)} style={[styles.icon, style]} {...restProps} />;
+  return <IconComp width={Number(size)} height={Number(size)} {...restProps} />;
 }
-
-const styles = StyleSheet.create({
-  icon: {},
-});

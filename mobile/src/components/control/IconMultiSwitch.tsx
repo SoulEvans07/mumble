@@ -34,15 +34,12 @@ export function IconMultiSwitch<T extends string>(props: IconMultiSwitchProps<T>
 
   return (
     <Pressable onPress={onSwitch} style={iconBtnBgStyle(props)}>
-      <Icon name={icon} size={iconSize} fill="white" style={styles.icon} />
+      <Icon name={icon} size={iconSize} fill="white" opacity={0.7} />
       {!!state?.active && <View style={styles.dot} />}
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  icon: {
-    opacity: 0.7,
-  },
   dot: dotStyle,
 });

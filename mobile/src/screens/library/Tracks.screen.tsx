@@ -31,7 +31,7 @@ export function TracksLibraryTab(): ReactElement {
     >
       {/* TODO: error handling */}
       {Object.values(tracks).map((item, index) => (
-        <TrackItem item={item} onPress={playTrack(index)} />
+        <TrackItem key={item.id} item={item} onPress={playTrack(index)} />
       ))}
     </ScrollView>
   );

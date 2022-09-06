@@ -31,8 +31,8 @@ export function IconSwitch(props: IconSwitchProps): ReactElement {
   const opacity = dotSwitch ? 0.7 : 1;
 
   return (
-    <Pressable onPress={onSwitch} style={iconBtnBgStyle(props)}>
-      <Icon name={icon} size={iconSize} fill="white" style={{ opacity }} />
+    <Pressable onPress={onSwitch} style={[iconBtnBgStyle(props), style]}>
+      <Icon name={icon} size={iconSize} fill="white" opacity={opacity} />
       {dotSwitch && active && <View style={styles.dot} />}
     </Pressable>
   );

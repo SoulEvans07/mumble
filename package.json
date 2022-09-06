@@ -10,6 +10,12 @@
       "shared/*"
     ],
     "nohoist": [
+      "**/@sharcoux",
+      "**/@sharcoux/**",
+      "**/@sharcoux/slider",
+      "**/@sharcoux/slider/**",
+      "**/react-native",
+      "**/react-native/**",
       "**/expo",
       "**/expo/**"
     ]
@@ -22,7 +28,7 @@
     "eslint-config-custom": "latest",
     "prettier": "^2.7.1",
     "turbo": "latest",
-    "typescript": "~4.3.5"
+    "typescript": "4.7.4"
   },
   "resolutions": {
     "@types/react": "17.0.48"
