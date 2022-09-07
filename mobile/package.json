@@ -10,7 +10,9 @@
     "eject": "expo eject",
     "test": "jest --watchAll",
     "build:android:dev": "eas build --profile development --platform android",
-    "build:android:prod": "eas build --platform android"
+    "build:android:prod": "eas build --platform android",
+    "icongen": "node scripts/generateIcons.js",
+    "posticongen": "prettier --write src/components/ui/svg/index.ts"
   },
   "jest": {
     "preset": "jest-expo"
@@ -50,6 +52,7 @@
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.66.13",
     "@types/react-redux": "^7.1.24",
+    "fs-extra": "^10.0.0",
     "jest": "^26.6.3",
     "jest-expo": "~45.0.0",
     "react-test-renderer": "17.0.2",
