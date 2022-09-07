@@ -1,9 +1,9 @@
 import { ReactElement, useEffect } from 'react';
-import { Text, View, ScrollView, StyleSheet, RefreshControl, Pressable } from 'react-native';
+import { ScrollView, StyleSheet, RefreshControl } from 'react-native';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectTracks } from '../../store/library/selectors';
-import { fetchTracks } from '../../store/library/thunk.actions';
+import { libraryActions } from '../../store/library';
 import { playerActions } from '../../store/player';
 import { TrackItem } from '../../containers/common/TrackItem';
 import { selectCurrent } from '../../store/player/selectors';
@@ -13,7 +13,7 @@ export function TracksLibraryTab(): ReactElement {
   const { status, data: tracks, error } = useAppSelector(selectTracks);
   const current = useAppSelector(selectCurrent);
 
-  const refresh = async () => dispatch(fetchTracks());
+  const refresh = async () => dispatch(libraryActions.fetchTracks());
 
   useEffect(() => {
     if (status === 'idle') refresh();

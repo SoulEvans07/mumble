@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { playPrevOrReset } from './actions';
 
 import { currentFrom } from './helpers';
 import { PlayerState, RepeatMode, SetQueuePayload } from './types';
@@ -27,6 +28,22 @@ export const playerSlice = createSlice({
         state.current.isPlaying = !state.current.isPlaying;
       }
     },
+    playNext(state) {
+      if (!state.current) return;
+      if (!state.queue.length) return;
+      state.current.trackIndex = (state.current.trackIndex + 1) % state.queue.length;
+      state.current.playbackPosition = 0;
+    },
+    playPrev(state) {
+      if (!state.current) return;
+      if (!state.queue.length) return;
+      state.current.trackIndex = (state.queue.length + state.current.trackIndex - 1) % state.queue.length;
+      state.current.playbackPosition = 0;
+    },
+    resetCurrent(state) {
+      if (!state.current) return;
+      state.current.playbackPosition = 0;
+    },
     switchShuffle(state) {
       state.shuffle = !state.shuffle;
     },
@@ -51,4 +68,5 @@ export const playerSlice = createSlice({
 
 export const playerActions = {
   ...playerSlice.actions,
+  playPrevOrReset,
 };

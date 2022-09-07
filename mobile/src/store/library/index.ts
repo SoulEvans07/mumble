@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { LibraryState } from './types';
 import { initLoadable } from '../../utils/loadableData';
-import { fetchTracks } from './thunk.actions';
+import { fetchTracks } from './actions';
 import { Track } from '../../types/model';
 import { AssetWatcher } from './helpers';
 
@@ -47,5 +47,5 @@ export const librarySlice = createSlice({
 
 export const libraryActions = {
   ...librarySlice.actions,
-  fetchLibrary: fetchTracks,
+  fetchTracks,
 };

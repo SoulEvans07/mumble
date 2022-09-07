@@ -24,7 +24,9 @@ export function PlayerControls(): ReactElement {
   const { track, isPlaying, playbackPosition } = useAppSelector(selectCurrentUnsafe);
 
   const switchShuffle = () => dispatch(playerActions.switchShuffle());
+  const playPrevOrReset = () => dispatch(playerActions.playPrevOrReset());
   const playOrPause = () => dispatch(playerActions.playOrPause());
+  const playNext = () => dispatch(playerActions.playNext());
   const switchRepeat = (mode: RepeatMode) => dispatch(playerActions.setRepeatMode(mode));
 
   const onSeek = (value: number) => dispatch(playerActions.setSeekPosition(value));
@@ -48,7 +50,7 @@ export function PlayerControls(): ReactElement {
       </View>
       <View style={styles.controlRow}>
         <IconSwitch icon="shuffle" {...sizes.side} active={shuffle} onSwitch={switchShuffle} />
-        <IconButton icon="backward-step" {...sizes.middle} style={styles.prevBtn} />
+        <IconButton icon="backward-step" {...sizes.middle} style={styles.prevBtn} onPress={playPrevOrReset} />
         <IconSwitch
           activeIcon="pause"
           inactiveIcon="play"
@@ -57,7 +59,7 @@ export function PlayerControls(): ReactElement {
           onSwitch={playOrPause}
           style={styles.playBtn}
         />
-        <IconButton icon="forward-step" {...sizes.middle} style={styles.nextBtn} />
+        <IconButton icon="forward-step" {...sizes.middle} style={styles.nextBtn} onPress={playNext} />
         <IconMultiSwitch
           icon="repeat"
           {...sizes.side}
