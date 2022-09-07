@@ -1,5 +1,6 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import TrackPlayer, { useProgress, useTrackPlayerEvents, Event } from 'react-native-track-player';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectCurrentUnsafe, selectPlayerDomain } from '../../store/player/selectors';
@@ -21,7 +22,7 @@ const repeatSwitchStates: SwitchState<RepeatMode>[] = [
 export function PlayerControls(): ReactElement {
   const dispatch = useAppDispatch();
   const { shuffle, repeat } = useAppSelector(selectPlayerDomain);
-  const { track, isPlaying, playbackPosition } = useAppSelector(selectCurrentUnsafe);
+  const { track, trackIndex, isPlaying, playbackPosition } = useAppSelector(selectCurrentUnsafe);
 
   const switchShuffle = () => dispatch(playerActions.switchShuffle());
   const playPrevOrReset = () => dispatch(playerActions.playPrevOrReset());
@@ -29,7 +30,18 @@ export function PlayerControls(): ReactElement {
   const playNext = () => dispatch(playerActions.playNext());
   const switchRepeat = (mode: RepeatMode) => dispatch(playerActions.setRepeatMode(mode));
 
-  const onSeek = (value: number) => dispatch(playerActions.setSeekPosition(value));
+  const onSeek = (value: number) => {
+    dispatch(playerActions.setSeekPosition(value));
+    if (value !== position) TrackPlayer.seekTo(value);
+  };
+
+  const { position } = useProgress();
+  useTrackPlayerEvents([Event.PlaybackTrackChanged], event => {
+    if (trackIndex !== event.nextTrack) dispatch(playerActions.jumpTo(event.nextTrack));
+  });
+  // useEffect(() => {
+  //   playerActions.setSeekPosition(position);
+  // }, [position]);
 
   return (
     <View style={styles.container}>
@@ -40,11 +52,11 @@ export function PlayerControls(): ReactElement {
         <SeekSlider
           style={styles.progressSlider}
           maximumValue={track.duration}
-          value={playbackPosition}
+          value={position}
           onValueChange={onSeek}
         />
         <View style={styles.timestampRow}>
-          <Text style={styles.timestamps}>{secondToMin(playbackPosition)}</Text>
+          <Text style={styles.timestamps}>{secondToMin(position)}</Text>
           <Text style={styles.timestamps}>{secondToMin(track.duration)}</Text>
         </View>
       </View>
