@@ -13,3 +13,5 @@ export const store = configureStore({
 export type AppGetState = typeof store.getState;
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<AppGetState>;
+
+export type AppThunkApiConfig = { state: RootState; dispatch: AppDispatch };

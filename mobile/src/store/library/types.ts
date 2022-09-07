@@ -1,12 +1,13 @@
 import { Album, Artist, Playlist, Track } from '../../types/model';
+import { Loadable } from '../../utils/loadableData';
 
 export type LibraryTab = 'Tracks' | 'Artists' | 'Albums' | 'Playlists';
 
 export interface LibraryState {
   activeTab: LibraryTab;
 
-  tracks: Record<string, Track>;
-  artists: Record<string, Artist>;
-  albums: Record<string, Album>;
-  playlists: Record<string, Playlist>;
+  tracks: Loadable<Record<string, Track>>;
+  artists: Loadable<Record<string, Artist>>;
+  albums: Loadable<Record<string, Album>>;
+  playlists: Loadable<Record<string, Playlist>>;
 }

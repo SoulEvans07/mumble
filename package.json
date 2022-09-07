@@ -2,11 +2,22 @@
   "name": "mumble",
   "version": "0.1.0",
   "private": true,
-  "workspaces": [
-    "mobile",
-    "desktop",
-    "shared/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "design",
+      "mobile",
+      "desktop",
+      "shared/*"
+    ],
+    "nohoist": [
+      "**/@sharcoux",
+      "**/@sharcoux/**",
+      "**/@sharcoux/slider",
+      "**/@sharcoux/slider/**",
+      "**/expo",
+      "**/expo/**"
+    ]
+  },
   "scripts": {
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
@@ -15,7 +26,7 @@
     "eslint-config-custom": "latest",
     "prettier": "^2.7.1",
     "turbo": "latest",
-    "typescript": "~4.3.5"
+    "typescript": "4.7.4"
   },
   "resolutions": {
     "@types/react": "17.0.48"
