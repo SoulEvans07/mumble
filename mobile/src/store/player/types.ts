@@ -2,6 +2,8 @@ import { Track } from '../../types/model';
 
 export type RepeatMode = 'repeat' | 'single' | 'no-repeat';
 
+export type Queue = Track[];
+
 export interface PlayerState {
   isVisible: boolean;
   current: {
@@ -11,5 +13,10 @@ export interface PlayerState {
   } | null;
   repeat: RepeatMode;
   shuffle: boolean;
-  queue: Track[];
+  queue: Queue;
+}
+
+export interface SetQueuePayload {
+  queue: Queue;
+  index: number;
 }

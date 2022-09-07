@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { StatusBar, StyleSheet, View } from 'react-native';
 
-import { AppNavigator } from './navigation/App.navigator';
+import { AppNavigator } from './screens/App.navigator';
 import { store } from './store';
 
 export default function App() {

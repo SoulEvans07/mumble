@@ -1,7 +1,7 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { SvgProps } from 'react-native-svg';
 
-import { RootTabParamList } from '../../../navigation/types';
+import { RootTabParamList } from '../../../screens/types';
 
 export interface BottomTabItem {
   to: keyof RootTabParamList;

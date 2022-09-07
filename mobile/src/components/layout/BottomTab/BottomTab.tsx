@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 
 import { BottomTabItem } from './types';
-import { useBottomTabNavigation } from '../../../navigation/types';
+import { useBottomTabNavigation } from '../../../screens/types';
 
 interface BottomTabProps {
   tabs: BottomTabItem[];
