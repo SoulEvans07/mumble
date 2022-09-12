@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import TrackPlayer from 'react-native-track-player';
 
-import { currentFrom } from './helpers';
 import { PlayerState, RepeatMode, SetQueuePayload } from './types';
 
 const initialState: PlayerState = {
@@ -39,11 +37,6 @@ export const playerSlice = createSlice({
       state.current.trackIndex = action.payload;
       state.current.playbackPosition = 0;
     },
-    resetCurrent(state) {
-      if (!state.current) return;
-      state.current.playbackPosition = 0;
-      TrackPlayer.seekTo(0);
-    },
     switchShuffle(state) {
       state.shuffle = !state.shuffle;
     },
@@ -64,20 +57,12 @@ export const playerSlice = createSlice({
     setQueue(state, action: PayloadAction<SetQueuePayload>) {
       const { queue, index } = action.payload;
       state.queue = queue;
-      state.current = currentFrom(queue[index], index);
+      state.current = {
+        trackIndex: index,
+        playbackPosition: 0,
+        isPlaying: true,
+      };
       state.isVisible = true;
-
-      TrackPlayer.reset();
-      TrackPlayer.add(
-        queue.map(track => ({
-          url: track.asset.uri,
-          title: track.title,
-          artist: 'Unknown artist',
-          duration: track.duration,
-        }))
-      );
-      TrackPlayer.skip(index);
-      TrackPlayer.play();
     },
   },
 });

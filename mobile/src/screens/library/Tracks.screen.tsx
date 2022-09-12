@@ -20,7 +20,7 @@ export function TracksLibraryTab(): ReactElement {
   }, [status]);
 
   const playTrack = (index: number) => () => {
-    dispatch(playerActions.setQueue({ queue: Object.values(tracks), index }));
+    dispatch(playerActions.startQueue({ queue: Object.values(tracks), index }));
   };
 
   return (
