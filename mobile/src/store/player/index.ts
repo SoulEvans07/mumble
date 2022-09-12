@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import TrackPlayer from 'react-native-track-player';
-import { playPrevOrReset } from './actions';
 
+import { playPrevOrReset } from './actions';
 import { currentFrom } from './helpers';
 import { PlayerState, RepeatMode, SetQueuePayload } from './types';
 

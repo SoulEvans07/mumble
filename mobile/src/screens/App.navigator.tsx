@@ -3,10 +3,6 @@ import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import House from '../components/ui/svg/house.svg';
-import AlbumCollection from '../components/ui/svg/album-collection.svg';
-import MagnifyingGlass from '../components/ui/svg/magnifying-glass.svg';
-
 import { RootTabParamList } from './types';
 import { HomeScreen } from './Home.screen';
 import { LibraryNavigator } from './library/Library.navigator';

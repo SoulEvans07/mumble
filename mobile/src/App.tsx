@@ -9,8 +9,10 @@ import { store } from './store';
 export default function App() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    TrackPlayer.setupPlayer().finally(() => setLoading(false));
-    TrackPlayer.updateOptions({ stoppingAppPausesPlayback: true });
+    TrackPlayer.setupPlayer().finally(() => {
+      setLoading(false);
+      TrackPlayer.updateOptions({ stoppingAppPausesPlayback: true });
+    });
     StatusBar.setBarStyle('light-content');
   }, []);
 
