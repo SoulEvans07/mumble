@@ -1,11 +1,11 @@
+import TrackPlayer from 'react-native-track-player';
+
 import { playerActions } from './index';
-import { createAppAsyncThunk } from '../helpers';
+import { createThunk } from '../helpers';
 import { selectCurrentUnsafe } from './selectors';
 
-// TODO: solve circular dependency issues cased by the idiotic @reduxjs/toolkit
-
 const resetTrackTrashold = 0.2;
-export const playPrevOrReset = createAppAsyncThunk('player/playPrevOrReset', (_: void, { getState, dispatch }) => {
+export const playPrevOrReset = createThunk((_: void, { getState, dispatch }) => {
   const { playbackPosition, track } = selectCurrentUnsafe(getState());
 
   const shouldReset = playbackPosition / track.duration > resetTrackTrashold;
@@ -13,7 +13,14 @@ export const playPrevOrReset = createAppAsyncThunk('player/playPrevOrReset', (_:
   else dispatch(playerActions.playPrev());
 });
 
-// export const playOrPause = createAppAsyncThunk('player/playOrPause', (_: void, { getState, dispatch }) => {
-//   const { playbackPosition, track } = selectCurrentUnsafe(getState());
+export const playOrPause = createThunk((_: void, { dispatch, getState }) => {
+  const { isPlaying } = selectCurrentUnsafe(getState());
 
-// })
+  if (isPlaying) {
+    dispatch(playerActions.pause());
+    TrackPlayer.pause();
+  } else {
+    dispatch(playerActions.play());
+    TrackPlayer.play();
+  }
+});

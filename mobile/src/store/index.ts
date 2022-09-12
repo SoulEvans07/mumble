@@ -15,3 +15,4 @@ export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<AppGetState>;
 
 export type AppThunkApiConfig = { state: RootState; dispatch: AppDispatch };
+export type AppThunkApiContext = { getState: AppGetState; dispatch: AppDispatch };
