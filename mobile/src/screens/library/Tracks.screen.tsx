@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, RefreshControl } from 'react-native';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectTracks } from '../../store/library/selectors';
 import { libraryActions } from '../../store/library';
-import { playerActions } from '../../store/player';
+import { playerActions } from '../../store/player/actions';
 import { TrackItem } from '../../containers/common/TrackItem';
 import { selectCurrent } from '../../store/player/selectors';
 

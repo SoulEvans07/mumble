@@ -8,7 +8,7 @@ import { IconSwitch } from '../../components/control/IconSwitch';
 import { IconMultiSwitch, SwitchState } from '../../components/control/IconMultiSwitch';
 import { IconButton } from '../../components/control/IconButton';
 import { CapsuleButton } from '../../components/control/CapsuleButton';
-import { playerActions } from '../../store/player';
+import { playerActions } from '../../store/player/actions';
 import { RepeatMode } from '../../store/player/types';
 import { secondToMin } from '../../utils/timeUtils';
 import { SeekSlider } from './SeekSlider';

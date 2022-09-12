@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import TrackPlayer from 'react-native-track-player';
 
-import { playOrPause, playPrevOrReset } from './actions';
 import { currentFrom } from './helpers';
 import { PlayerState, RepeatMode, SetQueuePayload } from './types';
 
@@ -34,19 +33,11 @@ export const playerSlice = createSlice({
       if (!state.current) return;
       state.current.isPlaying = false;
     },
-    playNext(state) {
+    setTrack(state, action: PayloadAction<number>) {
       if (!state.current) return;
       if (!state.queue.length) return;
-      state.current.trackIndex = (state.current.trackIndex + 1) % state.queue.length;
+      state.current.trackIndex = action.payload;
       state.current.playbackPosition = 0;
-      TrackPlayer.skipToNext();
-    },
-    playPrev(state) {
-      if (!state.current) return;
-      if (!state.queue.length) return;
-      state.current.trackIndex = (state.queue.length + state.current.trackIndex - 1) % state.queue.length;
-      state.current.playbackPosition = 0;
-      TrackPlayer.skipToPrevious();
     },
     resetCurrent(state) {
       if (!state.current) return;
@@ -90,9 +81,3 @@ export const playerSlice = createSlice({
     },
   },
 });
-
-export const playerActions = {
-  ...playerSlice.actions,
-  playPrevOrReset,
-  playOrPause,
-};

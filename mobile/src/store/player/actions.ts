@@ -1,19 +1,37 @@
 import TrackPlayer from 'react-native-track-player';
 
-import { playerActions } from './index';
+import { playerSlice } from './index';
 import { createThunk } from '../helpers';
-import { selectCurrentUnsafe } from './selectors';
+import { selectCurrentUnsafe, selectPlayerDomain } from './selectors';
+
+const playPrev = createThunk((_: void, { getState, dispatch }) => {
+  const { trackIndex } = selectCurrentUnsafe(getState());
+  const { queue } = selectPlayerDomain(getState());
+
+  const prevIndex = (queue.length + trackIndex - 1) % queue.length;
+  dispatch(playerActions.setTrack(prevIndex));
+  TrackPlayer.skip(prevIndex);
+});
+
+const playNext = createThunk((_: void, { getState, dispatch }) => {
+  const { trackIndex } = selectCurrentUnsafe(getState());
+  const { queue } = selectPlayerDomain(getState());
+
+  const nextIndex = (trackIndex + 1) % queue.length;
+  dispatch(playerActions.setTrack(nextIndex));
+  TrackPlayer.skip(nextIndex);
+});
 
 const resetTrackTrashold = 0.2;
-export const playPrevOrReset = createThunk((_: void, { getState, dispatch }) => {
+const playPrevOrReset = createThunk((_: void, { getState, dispatch }) => {
   const { playbackPosition, track } = selectCurrentUnsafe(getState());
 
   const shouldReset = playbackPosition / track.duration > resetTrackTrashold;
   if (shouldReset) dispatch(playerActions.resetCurrent());
-  else dispatch(playerActions.playPrev());
+  else dispatch(playPrev());
 });
 
-export const playOrPause = createThunk((_: void, { dispatch, getState }) => {
+const playOrPause = createThunk((_: void, { dispatch, getState }) => {
   const { isPlaying } = selectCurrentUnsafe(getState());
 
   if (isPlaying) {
@@ -24,3 +42,11 @@ export const playOrPause = createThunk((_: void, { dispatch, getState }) => {
     TrackPlayer.play();
   }
 });
+
+export const playerActions = {
+  ...playerSlice.actions,
+  playPrevOrReset,
+  playOrPause,
+  playPrev,
+  playNext,
+};

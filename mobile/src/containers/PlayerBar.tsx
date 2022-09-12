@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Pressable } from 'react-native';
 
 import { IconSwitch } from '../components/control/IconSwitch';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { playerActions } from '../store/player';
+import { playerActions } from '../store/player/actions';
 import { selectCurrentUnsafe } from '../store/player/selectors';
 import { CoverImage } from './common/CoverImage';
 

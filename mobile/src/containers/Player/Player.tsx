@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { Modal, View, StyleSheet } from 'react-native';
 
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import { playerActions } from '../../store/player';
+import { playerActions } from '../../store/player/actions';
 import { selectCurrentUnsafe, selectPlayerVisibility } from '../../store/player/selectors';
 import { LyricViewer } from './LyricViewer';
 import { PlayerControls } from './PlayerControls';
