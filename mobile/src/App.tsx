@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { Text, StatusBar, StyleSheet, View } from 'react-native';
 import TrackPlayer from 'react-native-track-player';
 
+import './polyfills';
 import { AppNavigator } from './screens/App.navigator';
 import { store } from './store';
 
