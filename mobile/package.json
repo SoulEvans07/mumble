@@ -7,6 +7,7 @@
     "android": "expo run:android",
     "test": "jest --watchAll",
     "build": "eas build --platform android --no-wait",
+    "build:local": "eas build --local --platform android --no-wait",
     "build:dev": "eas build --profile development --platform android --no-wait",
     "icongen": "node scripts/generateIcons.js",
     "posticongen": "prettier --write src/components/ui/svg/index.ts"
