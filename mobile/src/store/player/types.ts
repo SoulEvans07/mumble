@@ -4,7 +4,7 @@ export type RepeatMode = 'repeat' | 'single' | 'no-repeat';
 
 export type Queue = Track[];
 
-export interface PlayerState {
+export interface PlayerSLice {
   isVisible: boolean;
   current: {
     trackIndex: number;

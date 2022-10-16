@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { PlayerState, RepeatMode, SetQueuePayload } from './types';
+import { PlayerSLice, RepeatMode, SetQueuePayload } from './types';
 
-const initialState: PlayerState = {
+const initialState: PlayerSLice = {
   isVisible: false,
   current: null,
   queue: [],

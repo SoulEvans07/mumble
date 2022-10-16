@@ -1,51 +1,51 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, Draft, PayloadAction } from '@reduxjs/toolkit';
 
-import { LibraryState } from './types';
-import { initLoadable } from '../../utils/loadableData';
-import { fetchTracks } from './actions';
-import { Track } from '../../types/model';
-import { AssetWatcher } from './helpers';
+import { LibrarySlice, LibraryTab, LibraryTabLists, libraryTabs } from './types';
+import { initLoadable, LoadableStatus } from '../../utils/loadableData';
 
-const initialState: LibraryState = {
+const initialState: LibrarySlice = {
   activeTab: 'Tracks',
+  visibleTabs: Array.from(libraryTabs),
   includedFolders: ['file:///storage/emulated/0/Music/'],
   excludedFolders: ['file:///storage/emulated/0/Android/media/'],
-  tracks: initLoadable({}),
-  albums: initLoadable({}),
-  artists: initLoadable({}),
-  playlists: initLoadable({}),
+  Tracks: initLoadable({}),
+  Albums: initLoadable({}),
+  Artists: initLoadable({}),
+  Playlists: initLoadable({}),
 };
+
+interface TabListErrorPayload {
+  tab: LibraryTab;
+  error: string;
+}
+
+interface TabListDataSetterPayload<T extends LibraryTab> {
+  data: LibraryTabLists[T]['data'];
+}
+
+function createSetListDataReducer<T extends LibraryTab>(tab: T) {
+  return function (state: Draft<LibrarySlice>, action: PayloadAction<TabListDataSetterPayload<T>>) {
+    state[tab].status = 'succeeded';
+    // TODO: find a way to solve WritableDraft type mismatch @adam.szi
+    // @ts-ignore
+    state[tab].data = action.payload.data;
+  };
+}
 
 export const librarySlice = createSlice({
   name: 'library',
   initialState,
-  reducers: {},
-  extraReducers(builder) {
-    builder.addCase(fetchTracks.pending, state => {
-      state.tracks.status = 'loading';
-    });
-
-    builder.addCase(fetchTracks.fulfilled, (state, { payload: assets }) => {
-      state.tracks.status = 'succeeded';
-
-      const assetWatcher = new AssetWatcher(state.includedFolders, state.excludedFolders);
-      state.tracks.data = assets.reduce((map: Record<string, Track>, asset) => {
-        if (!assetWatcher.isWatched(asset)) return map;
-        return {
-          ...map,
-          [asset.id]: Track.from(asset),
-        };
-      }, {});
-    });
-
-    builder.addCase(fetchTracks.rejected, (state, { error }) => {
-      state.tracks.status = 'failed';
-      state.tracks.error = error.message;
-    });
+  reducers: {
+    setListPending(state, action: PayloadAction<LibraryTab>) {
+      state[action.payload].status = 'loading';
+    },
+    setListFailed(state, action: PayloadAction<TabListErrorPayload>) {
+      const { tab, error } = action.payload;
+      state[tab].error = error;
+    },
+    setTracksList: createSetListDataReducer('Tracks'),
+    setAlbumsList: createSetListDataReducer('Albums'),
+    setArtistsList: createSetListDataReducer('Artists'),
+    setPlaylistsList: createSetListDataReducer('Playlists'),
   },
 });
-
-export const libraryActions = {
-  ...librarySlice.actions,
-  fetchTracks,
-};

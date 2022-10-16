@@ -4,13 +4,25 @@ import { Loadable } from '../../utils/loadableData';
 export const libraryTabs = ['Tracks', 'Playlists', 'Artists', 'Albums'] as const;
 export type LibraryTab = typeof libraryTabs[number];
 
-export interface LibraryState {
+export interface LibraryTabData {
+  Tracks: Track;
+  Artists: Artist;
+  Albums: Album;
+  Playlists: Playlist;
+}
+
+interface LibraryState {
   activeTab: LibraryTab;
+  visibleTabs: LibraryTab[];
+}
+
+interface LibrarySettings {
   includedFolders: string[];
   excludedFolders: string[];
-
-  tracks: Loadable<Record<string, Track>>;
-  artists: Loadable<Record<string, Artist>>;
-  albums: Loadable<Record<string, Album>>;
-  playlists: Loadable<Record<string, Playlist>>;
 }
+
+export type LibraryTabLists = {
+  [tab in LibraryTab]: Loadable<Record<string, LibraryTabData[tab]>>;
+};
+
+export type LibrarySlice = LibraryState & LibrarySettings & LibraryTabLists;

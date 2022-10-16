@@ -1,7 +1,7 @@
 import { Track } from '../../types/model';
-import { PlayerState } from './types';
+import { PlayerSLice } from './types';
 
-export function currentFrom(track: Track, index: number): PlayerState['current'] {
+export function currentFrom(track: Track, index: number): PlayerSLice['current'] {
   return {
     trackIndex: index,
     playbackPosition: 0,
