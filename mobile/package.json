@@ -10,7 +10,8 @@
     "build:local": "eas build --local --platform android --no-wait",
     "build:dev": "eas build --profile development --platform android --no-wait",
     "icongen": "node scripts/generateIcons.js",
-    "posticongen": "prettier --write src/components/ui/svg/index.ts"
+    "posticongen": "prettier --write src/components/ui/svg/index.ts",
+    "emulator": "emulator -avd GalaxyS22"
   },
   "jest": {
     "preset": "jest-expo"
